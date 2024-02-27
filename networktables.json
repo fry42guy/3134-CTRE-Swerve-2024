@@ -1,0 +1,34 @@
+[
+  {
+    "name": "/SmartDashboard/LeftShooter(PID) KP",
+    "type": "double",
+    "value": 0.7,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/SmartDashboard/LeftShooter(PID) KI",
+    "type": "double",
+    "value": 4.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/SmartDashboard/LeftShooter(PID) KD",
+    "type": "double",
+    "value": 0.0,
+    "properties": {
+      "persistent": true
+    }
+  },
+  {
+    "name": "/SmartDashboard/TEST PID (RPM) Speed",
+    "type": "double",
+    "value": 2500.0,
+    "properties": {
+      "persistent": true
+    }
+  }
+]

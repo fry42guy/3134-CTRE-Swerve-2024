@@ -1,0 +1,116 @@
+{
+  "version": 1.0,
+<<<<<<<< HEAD:src/main/deploy/pathplanner/autos/Note 5 test.auto
+  "startingPose": null,
+========
+  "startingPose": {
+    "position": {
+      "x": 1.1852004303152672,
+      "y": 4.737997489313514
+    },
+    "rotation": 0.0
+  },
+>>>>>>>> dcf0cd6097a7d54954c7648ce09577523abf8a9e:src/main/deploy/pathplanner/autos/sis 1.auto
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Home"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shoot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "shoot"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "intake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+<<<<<<<< HEAD:src/main/deploy/pathplanner/autos/Note 5 test.auto
+            "pathName": "STN 5"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "N 5 TS"
+========
+            "pathName": "STN 7"
+>>>>>>>> dcf0cd6097a7d54954c7648ce09577523abf8a9e:src/main/deploy/pathplanner/autos/sis 1.auto
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "reverseintake"
+          }
+        },
+        {
+<<<<<<<< HEAD:src/main/deploy/pathplanner/autos/Note 5 test.auto
+========
+          "type": "path",
+          "data": {
+            "pathName": "N7 T S"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shoot"
+          }
+        },
+        {
+>>>>>>>> dcf0cd6097a7d54954c7648ce09577523abf8a9e:src/main/deploy/pathplanner/autos/sis 1.auto
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "shoot"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "intake"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
