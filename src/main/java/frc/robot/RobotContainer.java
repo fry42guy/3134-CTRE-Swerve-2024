@@ -94,9 +94,9 @@ public class RobotContainer
     m_driverController.povLeft().whileTrue(new ClimberFWD(m_ClimberSubsystem));
     m_driverController.povRight().whileTrue(new ClimberREV(m_ClimberSubsystem));
     m_driverController.x().toggleOnTrue(new TargetPIDPivotCommand(m_ArmSubsystem));
-    m_driverController.b().onTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
+    m_driverController.a().onTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
     m_driverController.y().whileTrue(new AutoIntakeNote(m_IntakeSubsystem, 2  , 0.125));
-   // m_driverController.a().whileTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
+    m_driverController.b().onTrue(m_ArmSubsystem.runOnce(() -> m_ArmSubsystem.ZeroPivotPositon()));
 
 
 

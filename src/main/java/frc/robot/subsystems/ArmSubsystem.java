@@ -147,6 +147,10 @@ if (inputangle < .25 && encoderupdated == false) {
     
   }
 
+  public void ZeroPivotPositon(){
+    PivotMotor.setPosition(0);
+  }
+
   @Override
   public void periodic() {
 
