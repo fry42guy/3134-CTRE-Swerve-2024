@@ -43,7 +43,7 @@ public class ArmSubsystem extends SubsystemBase {
   
 private final CurrentLimitsConfigs m_currentLimits = new CurrentLimitsConfigs();
 
-public final DigitalInput m_FwdLimit = new DigitalInput(0);
+public final DigitalInput m_FwdLimit = new DigitalInput(2);
 public final DigitalInput m_RevLimit = new DigitalInput(1);
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {
