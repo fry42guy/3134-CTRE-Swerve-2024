@@ -196,6 +196,10 @@ if (inputangle < .25 && encoderupdated == false) {
     SmartDashboard.putNumber("Pivot Motor Current",PivotMotor.getStatorCurrent().getValueAsDouble());
     SmartDashboard.putNumber("Calc Encoder Position", Calibrate_Arm_Encoder_To_Hex_Encoder());
 
+    SmartDashboard.putBoolean("FWD Limit Arm", m_FwdLimit.get());
+    SmartDashboard.putBoolean("Rev Limit Arm", m_RevLimit.get());
+    
+
     // This method will be called once per scheduler run
   }
 }
