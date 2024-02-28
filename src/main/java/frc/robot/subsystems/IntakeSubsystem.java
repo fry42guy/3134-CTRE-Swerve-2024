@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,7 +18,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   private final TalonSRX IntakeMotor;
 
-  private final Ultrasonic RangeFinder ;
+  private final DigitalInput RangeFinder ;
   /** Creates a new Intake. */
   public IntakeSubsystem() {
 
@@ -25,10 +26,10 @@ IntakeMotor = new TalonSRX(Constants.Intake.IntakeMotorID);
 IntakeMotor.setInverted(true);
 
 
-RangeFinder = new Ultrasonic(2, 3);
+RangeFinder = new DigitalInput(3);
 
 //RangeFinder.setAutomaticMode(true);
-RangeFinder.setEnabled(true);
+
 
 
 
@@ -59,7 +60,6 @@ public void Stop(){
 
 
 
-SmartDashboard.putNumber("Range Finder", getrange());
 
   }
 
@@ -67,35 +67,14 @@ SmartDashboard.putNumber("Range Finder", getrange());
 
 public boolean Note_In_Intake(){
 
-  Double dist = RangeFinder.getRangeInches();
+  return RangeFinder.get();
 
-  if (dist < 2.5) {
-
-    return true;
-
-  }
-
-  if (dist > 150) {
-     return true;}
-
-
-  else 
-  {
-     return false;
-    }
+  
 
 
 
 
 }
-
-
-public double getrange(){
-
-return RangeFinder.getRangeInches();
-
-}
-
 
 
 

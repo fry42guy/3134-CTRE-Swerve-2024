@@ -10,12 +10,17 @@ package frc.robot.subsystems;
 //import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 //import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.HardwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.DutyCycleOut;
 //import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.ForwardLimitSourceValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DutyCycle;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -33,9 +38,13 @@ public class ArmSubsystem extends SubsystemBase {
   private final double MaxCurrent;
 
  private boolean encoderupdated = false;
+
+ private DutyCycleOut m_DutyCycle = new DutyCycleOut(0);
   
 private final CurrentLimitsConfigs m_currentLimits = new CurrentLimitsConfigs();
 
+public final DigitalInput m_FwdLimit = new DigitalInput(0);
+public final DigitalInput m_RevLimit = new DigitalInput(1);
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {
 
@@ -78,10 +87,17 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
     toConfigure.SoftwareLimitSwitch.withReverseSoftLimitThreshold(-2);
     toConfigure.SoftwareLimitSwitch.withForwardSoftLimitEnable(true);
     toConfigure.SoftwareLimitSwitch.withReverseSoftLimitEnable(true);
-//toConfigure.MotorOutput.withMotorOutput(NeutralMode.Brake);
+      
+
+
+    //toConfigure.MotorOutput.withMotorOutput(NeutralMode.Brake);
     
 
     PivotMotor.getConfigurator().apply(toConfigure);
+
+    
+
+
   }
 
       
@@ -92,6 +108,10 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
         m_currentLimits.StatorCurrentLimitEnable = true;
          m_currentLimits.SupplyCurrentLimitEnable = true;
          toConfigure.CurrentLimits = m_currentLimits;
+
+
+
+
          PivotMotor.getConfigurator().apply(toConfigure);
       }
 
@@ -100,7 +120,12 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
   }
 
   public void setspeed(Double speed){
-PivotMotor.set( speed);
+PivotMotor.setControl(m_DutyCycle.withOutput(speed)
+.withLimitForwardMotion(m_FwdLimit.get())
+.withLimitReverseMotion(m_RevLimit.get())
+);
+
+
 
 
   }

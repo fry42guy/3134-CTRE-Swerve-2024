@@ -53,9 +53,12 @@ configTalon();
  {
 
   setPoint = m_Calcs.CalcArmEncoderViaTarget(7);
-System.out.println(setPoint);
 
-  m_ArmSubsystem.PivotMotor.setControl(m_armPositionVoltage.withPosition(setPoint));
+
+  m_ArmSubsystem.PivotMotor.setControl(m_armPositionVoltage.withPosition(setPoint)
+  .withLimitForwardMotion(m_ArmSubsystem.m_FwdLimit.get())
+  .withLimitReverseMotion(m_ArmSubsystem.m_RevLimit.get())
+  );
     // double feedforward = 0.00;
     // double speed = m_PivotPIDController.calculate(m_ArmSubsystem.getPivotEncoder(), setPoint);
     // speed = (speed > 0) ? speed + feedforward : speed - feedforward;
