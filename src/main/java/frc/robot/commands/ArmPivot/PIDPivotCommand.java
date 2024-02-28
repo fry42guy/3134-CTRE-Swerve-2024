@@ -52,8 +52,8 @@ setPoint = m_ArmSubsystem.getPivotEncoder();
   {
 
     m_ArmSubsystem.PivotMotor.setControl(m_armPositionVoltage.withPosition(setPoint)
-    .withLimitForwardMotion(m_ArmSubsystem.m_FwdLimit.get())
-    .withLimitReverseMotion(m_ArmSubsystem.m_RevLimit.get())
+    .withLimitForwardMotion(!m_ArmSubsystem.m_FwdLimit.get())
+    .withLimitReverseMotion(!m_ArmSubsystem.m_RevLimit.get())
     );
     // double feedforward = 0.00;
     // double speed = m_PivotPIDController.calculate(m_ArmSubsystem.getPivotEncoder(), setPoint);

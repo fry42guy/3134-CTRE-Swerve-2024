@@ -26,8 +26,8 @@ public class AutoZeroPivotCommand extends Command {
   
    // m_PivotPIDController.enableContinuousInput(-1, 1);
     m_armPositionVoltage = new PositionVoltage(0)
-    .withLimitForwardMotion(m_ArmSubsystem.m_FwdLimit.get())
-    .withLimitReverseMotion(m_ArmSubsystem.m_RevLimit.get());
+    .withLimitForwardMotion(!m_ArmSubsystem.m_FwdLimit.get())
+    .withLimitReverseMotion(!m_ArmSubsystem.m_RevLimit.get());
     
 
    

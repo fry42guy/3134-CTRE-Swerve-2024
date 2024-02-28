@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+
 public class ArmSubsystem extends SubsystemBase {
 
   public final TalonFX PivotMotor;
@@ -121,8 +122,8 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
 
   public void setspeed(Double speed){
 PivotMotor.setControl(m_DutyCycle.withOutput(speed)
-.withLimitForwardMotion(m_FwdLimit.get())
-.withLimitReverseMotion(m_RevLimit.get())
+.withLimitForwardMotion(!m_FwdLimit.get())
+.withLimitReverseMotion(!m_RevLimit.get())
 );
 
 
@@ -130,7 +131,7 @@ PivotMotor.setControl(m_DutyCycle.withOutput(speed)
 
 
   public void LimitresetLow(){
-if (m_RevLimit.get()) {
+if (!m_RevLimit.get()) {
 
   ZeroPivotPositon();
 
@@ -196,9 +197,9 @@ if (inputangle < .25 && encoderupdated == false) {
     SmartDashboard.putNumber("Pivot Motor Current",PivotMotor.getStatorCurrent().getValueAsDouble());
     SmartDashboard.putNumber("Calc Encoder Position", Calibrate_Arm_Encoder_To_Hex_Encoder());
 
-    SmartDashboard.putBoolean("FWD Limit Arm", m_FwdLimit.get());
-    SmartDashboard.putBoolean("Rev Limit Arm", m_RevLimit.get());
-    
+    SmartDashboard.putBoolean("FWD Limit Arm", !m_FwdLimit.get());
+    SmartDashboard.putBoolean("Rev Limit Arm", !m_RevLimit.get());
+
 
     // This method will be called once per scheduler run
   }
