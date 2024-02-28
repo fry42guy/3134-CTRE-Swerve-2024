@@ -85,8 +85,8 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
 
     toConfigure.SoftwareLimitSwitch.withForwardSoftLimitThreshold(245.0);
     toConfigure.SoftwareLimitSwitch.withReverseSoftLimitThreshold(-2);
-    toConfigure.SoftwareLimitSwitch.withForwardSoftLimitEnable(true);
-    toConfigure.SoftwareLimitSwitch.withReverseSoftLimitEnable(true);
+    toConfigure.SoftwareLimitSwitch.withForwardSoftLimitEnable(false);
+    toConfigure.SoftwareLimitSwitch.withReverseSoftLimitEnable(false);
       
 
 
@@ -126,9 +126,19 @@ PivotMotor.setControl(m_DutyCycle.withOutput(speed)
 );
 
 
-
-
   }
+
+
+  public void LimitresetLow(){
+if (m_RevLimit.get()) {
+
+  ZeroPivotPositon();
+
+}
+
+
+}
+
 
   public void stop(){
     PivotMotor.set( 0);
@@ -178,6 +188,8 @@ if (inputangle < .25 && encoderupdated == false) {
 
   @Override
   public void periodic() {
+
+    LimitresetLow();
 
     SmartDashboard.putNumber("Hex Encoder Value", HexEncoder.getAbsolutePosition());
     SmartDashboard.putNumber("Pivot Motor Encoder", getPivotEncoder());
