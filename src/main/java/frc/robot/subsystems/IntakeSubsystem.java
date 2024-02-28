@@ -59,7 +59,7 @@ public void Stop(){
     // This method will be called once per scheduler run
 
 
-
+SmartDashboard.putBoolean("Intake Beam", RangeFinder.get());
 
   }
 
