@@ -76,9 +76,9 @@ public class RobotContainer
   
     drivetrain.setDefaultCommand
     (
-      drivetrain.applyRequest(() -> drive.withVelocityX(-Math.pow(MathUtil.applyDeadband(m_driverController.getLeftY(), 0.01),2) * MaxSpeed)
-      .withVelocityY(-Math.pow(MathUtil.applyDeadband(m_driverController.getLeftX(), 0.01),2) * MaxSpeed) // Drive left with negative X (left)
-      .withRotationalRate(-Math.pow(MathUtil.applyDeadband(-m_driverController.getRightX(), 0.01),2) * MaxAngularRate) // Drive counterclockwise with negative X (left)
+      drivetrain.applyRequest(() -> drive.withVelocityX(-Math.pow(MathUtil.applyDeadband(m_driverController.getLeftY(), 0.01),3) * MaxSpeed)
+      .withVelocityY(-Math.pow(MathUtil.applyDeadband(m_driverController.getLeftX(), 0.01),3) * MaxSpeed) // Drive left with negative X (left)
+      .withRotationalRate(-Math.pow(MathUtil.applyDeadband(-m_driverController.getRightX(), 0.01),3) * MaxAngularRate) // Drive counterclockwise with negative X (left)
       ).ignoringDisable(true));
 
     //m_driverController.a().whileTrue(drivetrain.applyRequest(() -> brake));
