@@ -61,8 +61,8 @@ public class Constants
       public static final int LeftShooterID = 40;
       public static final int RightShooterID = 46;
     
-      public static final Double SlowSpeed = .375;
-      public static final Double FastSpeed = .75;
+      public static final Double SlowSpeed = 1000.0;
+      public static final Double FastSpeed = 4000.0;
       public static final Double SameSpeed = .75; //Not Used
       public static final Double TopSpeed = 0.6; //Not used
       public static final Double BottomSpeed = 0.4;//Not used
