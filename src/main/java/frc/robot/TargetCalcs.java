@@ -20,11 +20,6 @@ import frc.robot.subsystems.LimelightHelpers;
 
 /** Add your docs here. */
 public class TargetCalcs {
-
-
-
-
-
 public AprilTagFieldLayout Layout;
 
 public AprilTag targeTag;
