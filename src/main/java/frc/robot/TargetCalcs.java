@@ -15,6 +15,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.LimelightHelpers;
 
 /** Add your docs here. */
@@ -29,6 +30,8 @@ public AprilTagFieldLayout Layout;
 public AprilTag targeTag;
 
 public LimelightHelpers limelight;
+
+public CommandSwerveDrivetrain drivebase;
 
 public TargetCalcs(){
 

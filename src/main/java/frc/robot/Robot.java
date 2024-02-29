@@ -5,6 +5,7 @@
 package frc.robot;
 
 
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,15 +18,15 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private final Field2d m_feild = new Field2d();
+  //private final Field2d m_feild = new Field2d();
   
  
 
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-
-    SmartDashboard.putData("Feild", m_feild);
+m_robotContainer.drivetrain.init();
+    
    
     //PortForwarder.add(5800, "photonvision.local", 5800); // for photonvision
     
@@ -34,7 +35,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run(); 
 
-//m_feild.setRobotPose(m_robotContainer.drivetrain.);
+
 
   }
 
