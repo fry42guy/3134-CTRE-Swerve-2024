@@ -84,16 +84,16 @@ public class RobotContainer
 
     //m_driverController.a().whileTrue(drivetrain.applyRequest(() -> brake));
     m_driverController.back().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
-    m_driverController.povUp().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0.5).withVelocityY(0)));
-    m_driverController.povDown().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-0.5).withVelocityY(0)));
+    //m_driverController.povUp().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0.5).withVelocityY(0)));
+    //m_driverController.povDown().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-0.5).withVelocityY(0)));
     m_driverController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.SlowSpeed,true));
     m_driverController.axisGreaterThan(XboxController.Axis.kLeftTrigger.value, .05).whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.FastSpeed,true));
     m_driverController.rightStick().whileTrue(new ArmDown(m_ArmSubsystem)); 
     m_driverController.leftStick().whileTrue(new ArmUP(m_ArmSubsystem));                                                                   
     m_driverController.rightBumper().whileTrue(new IntakeFWDWithSensor(m_IntakeSubsystem));
     m_driverController.axisGreaterThan(XboxController.Axis.kRightTrigger.value, .05).whileTrue(new IntakeREV(m_IntakeSubsystem));
-    m_driverController.povLeft().whileTrue(new ClimberFWD(m_ClimberSubsystem));
-    m_driverController.povRight().whileTrue(new ClimberREV(m_ClimberSubsystem));
+    m_driverController.povUp().whileTrue(new ClimberFWD(m_ClimberSubsystem));
+    m_driverController.povDown().whileTrue(new ClimberREV(m_ClimberSubsystem));
     m_driverController.x().toggleOnTrue(new TargetPIDPivotCommand(m_ArmSubsystem));
     m_driverController.a().onTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
     m_driverController.y().whileTrue(new AutoIntakeNote(m_IntakeSubsystem, 2  , 0.125));
