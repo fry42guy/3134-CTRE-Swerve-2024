@@ -18,6 +18,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  
   //private final Field2d m_feild = new Field2d();
   
  
@@ -26,6 +28,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_robotContainer = new RobotContainer();
 m_robotContainer.drivetrain.init();
+
+m_robotContainer.m_Calcs2.SetSpeakerTargetID();
     
    
     //PortForwarder.add(5800, "photonvision.local", 5800); // for photonvision
@@ -35,6 +39,10 @@ m_robotContainer.drivetrain.init();
   public void robotPeriodic() {
     CommandScheduler.getInstance().run(); 
 
+    if (m_robotContainer.m_Calcs2.TargetID == -5){
+
+m_robotContainer.m_Calcs2.SetSpeakerTargetID();
+    }
 
 
   }
@@ -50,6 +58,8 @@ m_robotContainer.drivetrain.init();
 
   @Override
   public void autonomousInit() {
+
+    m_robotContainer.m_Calcs2.SetSpeakerTargetID();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
 
@@ -69,7 +79,7 @@ m_robotContainer.drivetrain.init();
 
   @Override
   public void teleopInit() {
-   
+   m_robotContainer.m_Calcs2.SetSpeakerTargetID();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

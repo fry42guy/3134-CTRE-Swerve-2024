@@ -45,10 +45,23 @@ public class RobotContainer
   /* Setting up bindings for necessary control of the swerve drive platform */
  // private final CommandXboxController m_driverController = new CommandXboxController(0); // My joystick
 
+
+
+
+
+
+
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
+
+
+  private final SwerveRequest.FieldCentricFacingAngle driveFaceinangle = new SwerveRequest.FieldCentricFacingAngle()
+      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+      .withDriveRequestType(DriveRequestType.OpenLoopVoltage); 
+
+
   
   // driver buttons
   private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
@@ -68,6 +81,8 @@ public class RobotContainer
   public static ClimberSubsystem  m_ClimberSubsystem  = new ClimberSubsystem();
   public static TargetCalcs       m_Calcs             = new TargetCalcs();
 
+  public final TargetCalcs2       m_Calcs2             = new TargetCalcs2();
+
   /* Auto List */
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -81,6 +96,13 @@ public class RobotContainer
       .withVelocityY(-Math.pow(m_driverController.getLeftX(),3) * MaxSpeed) // Drive left with negative X (left)
       .withRotationalRate(Math.pow(-m_driverController.getRightX(),3) * MaxAngularRate) // Drive counterclockwise with negative X (left)
       ).ignoringDisable(true));
+
+
+
+m_driverController.povDownLeft().toggleOnTrue(drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
+.withVelocityY(-Math.pow(m_driverController.getLeftX(),3) * MaxSpeed)
+.withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()))));
+
 
     //m_driverController.a().whileTrue(drivetrain.applyRequest(() -> brake));
     m_driverController.back().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));

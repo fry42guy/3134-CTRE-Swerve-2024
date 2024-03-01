@@ -7,6 +7,9 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +23,8 @@ public class TargetCalcs2 {
 public AprilTagFieldLayout Layout;
 
 public AprilTag targeTag;
+
+public Integer TargetID;
 
 
 public TargetCalcs2(){
@@ -49,19 +54,45 @@ if (oAprilTagpos3d.isPresent()){
 return AprilTagpos2d;
 }
 
-public Rotation2d RotationToTag(int TagId, Pose2d RobotPose2D){
+public Rotation2d AbsRotationToTag(int TagId, Pose2d RobotPose2D){
 
-  //GetApriltagePose(TagID)
+  Pose2d TagPose = GetApriltagePose(TagId);
+
+Pose2d RoboPose = RobotPose2D;
+
+
+Transform2d Transfrom = new Transform2d(RoboPose,TagPose);
+
+Transfrom.getRotation();
 
 
 
 
-
-    return new Rotation2d();
+    return Transfrom.getRotation();
 }
 
 public void periodic(){}
 
+public void SetSpeakerTargetID(){
 
+ Optional<Alliance> ally = DriverStation.getAlliance();
+if (ally.isPresent()) {
+    if (ally.get() == Alliance.Red) {
+        
+TargetID = 7;
+
+    }
+    if (ally.get() == Alliance.Blue) {
+        
+      TargetID = 4;
+    }
+}
+else {
+
+  TargetID = -5;
+    
+}
+
+}
 
 }
