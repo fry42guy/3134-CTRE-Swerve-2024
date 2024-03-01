@@ -77,23 +77,23 @@ public class RobotContainer
   
     drivetrain.setDefaultCommand
     (
-      drivetrain.applyRequest(() -> drive.withVelocityX(-Math.pow(MathUtil.applyDeadband(m_driverController.getLeftY(), 0.01),3) * MaxSpeed)
-      .withVelocityY(-Math.pow(MathUtil.applyDeadband(m_driverController.getLeftX(), 0.01),3) * MaxSpeed) // Drive left with negative X (left)
-      .withRotationalRate(Math.pow(MathUtil.applyDeadband(-m_driverController.getRightX(), 0.01),3) * MaxAngularRate) // Drive counterclockwise with negative X (left)
+      drivetrain.applyRequest(() -> drive.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
+      .withVelocityY(-Math.pow(m_driverController.getLeftX(),3) * MaxSpeed) // Drive left with negative X (left)
+      .withRotationalRate(Math.pow(-m_driverController.getRightX(),3) * MaxAngularRate) // Drive counterclockwise with negative X (left)
       ).ignoringDisable(true));
 
     //m_driverController.a().whileTrue(drivetrain.applyRequest(() -> brake));
     m_driverController.back().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
-    m_driverController.povUp().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0.5).withVelocityY(0)));
-    m_driverController.povDown().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-0.5).withVelocityY(0)));
+    //m_driverController.povUp().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0.5).withVelocityY(0)));
+    //m_driverController.povDown().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-0.5).withVelocityY(0)));
     m_driverController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.SlowSpeed,true));
     m_driverController.axisGreaterThan(XboxController.Axis.kLeftTrigger.value, .05).whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.FastSpeed,true));
     m_driverController.rightStick().whileTrue(new ArmDown(m_ArmSubsystem)); 
     m_driverController.leftStick().whileTrue(new ArmUP(m_ArmSubsystem));                                                                   
     m_driverController.rightBumper().whileTrue(new IntakeFWDWithSensor(m_IntakeSubsystem));
     m_driverController.axisGreaterThan(XboxController.Axis.kRightTrigger.value, .05).whileTrue(new IntakeREV(m_IntakeSubsystem));
-    m_driverController.povLeft().whileTrue(new ClimberFWD(m_ClimberSubsystem));
-    m_driverController.povRight().whileTrue(new ClimberREV(m_ClimberSubsystem));
+    m_driverController.povUp().whileTrue(new ClimberFWD(m_ClimberSubsystem));
+    m_driverController.povDown().whileTrue(new ClimberREV(m_ClimberSubsystem));
     m_driverController.x().toggleOnTrue(new TargetPIDPivotCommand(m_ArmSubsystem));
     m_driverController.a().onTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
     m_driverController.y().whileTrue(new AutoIntakeNote(m_IntakeSubsystem, 2  , 0.125));

@@ -46,6 +46,9 @@ private final CurrentLimitsConfigs m_currentLimits = new CurrentLimitsConfigs();
 
 public final DigitalInput m_FwdLimit = new DigitalInput(2);
 public final DigitalInput m_RevLimit = new DigitalInput(1);
+
+public boolean hasHomed;
+
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {
 
@@ -57,6 +60,7 @@ public final DigitalInput m_RevLimit = new DigitalInput(1);
     HexEncoder = new DutyCycleEncoder(Constants.Arm.EncoderPWMID);
     MaxCurrent = Constants.Arm.MAX_CURRENT_DRAW;
 
+    hasHomed = false;
     
 
     ConfigPivotCurrent();
@@ -169,8 +173,8 @@ if (inputangle < .25 && encoderupdated == false) {
   encoderupdated = true; 
 
 }
-      double CalculatedEnocderPosition = (1287.7292741*(Math.pow(inputangle,2))+(-2760.633858*inputangle)+(1338.221256));
-
+     // double CalculatedEnocderPosition = (1287.7292741*(Math.pow(inputangle,2))+(-2760.633858*inputangle)+(1338.221256));
+ double CalculatedEnocderPosition = ((-48914*(Math.pow(inputangle, 4))) + (140171 * ( Math.pow(inputangle, 3))) + (-146621*(Math.pow(inputangle, 2))) + (65466*inputangle) + (-10284));
       return CalculatedEnocderPosition;
 
 //PivotMotor.setPosition(CalculatedEnocderPosition);
@@ -184,6 +188,16 @@ if (inputangle < .25 && encoderupdated == false) {
   }
 
   public void ZeroPivotPositon(){
+
+    if (hasHomed = false){
+
+      ConfigSoftlimits();
+
+      hasHomed = true;
+
+    }
+
+
     PivotMotor.setPosition(0);
   }
 
@@ -203,4 +217,38 @@ if (inputangle < .25 && encoderupdated == false) {
 
     // This method will be called once per scheduler run
   }
+
+public void ConfigSoftlimits() {
+
+
+      //PivotMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true,Constants.Arm.MAX_CURRENT_DRAW,Constants.Arm.MAX_CURRENT_DRAW + 5, 0.5));
+TalonFXConfiguration toConfigure = new TalonFXConfiguration();
+    m_currentLimits.SupplyCurrentLimit = Constants.Arm.MAX_CURRENT_DRAW ; // Limit to 1 amps
+    m_currentLimits.SupplyCurrentThreshold = Constants.Arm.MAX_CURRENT_DRAW + 5; // If we exceed 4 amps
+    m_currentLimits.SupplyTimeThreshold = .5; // For at least 1 second
+    m_currentLimits.SupplyCurrentLimitEnable = true; // And enable it
+
+    m_currentLimits.StatorCurrentLimit = 25; // Limit stator to 20 amps
+    m_currentLimits.StatorCurrentLimitEnable = true; // And enable it
+
+    
+
+    toConfigure.CurrentLimits = m_currentLimits;
+
+    toConfigure.SoftwareLimitSwitch.withForwardSoftLimitThreshold(256);
+    toConfigure.SoftwareLimitSwitch.withReverseSoftLimitThreshold(-1);
+    toConfigure.SoftwareLimitSwitch.withForwardSoftLimitEnable(true);
+    toConfigure.SoftwareLimitSwitch.withReverseSoftLimitEnable(true);
+      
+
+
+    //toConfigure.MotorOutput.withMotorOutput(NeutralMode.Brake);
+    
+
+    PivotMotor.getConfigurator().apply(toConfigure);
+
+}
+
+
+
 }
