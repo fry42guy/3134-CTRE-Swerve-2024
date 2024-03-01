@@ -99,7 +99,7 @@ public class RobotContainer
 
 
 
-m_driverController.povDownLeft().toggleOnTrue(drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
+m_driverController.povLeft().toggleOnTrue(drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
 .withVelocityY(-Math.pow(m_driverController.getLeftX(),3) * MaxSpeed)
 .withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()))));
 
