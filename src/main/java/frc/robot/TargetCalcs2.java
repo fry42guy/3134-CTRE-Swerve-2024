@@ -8,8 +8,12 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,21 +58,51 @@ if (oAprilTagpos3d.isPresent()){
 return AprilTagpos2d;
 }
 
+
+public double getDistTo_Tag(int TagId, Pose2d RobotPose2D){
+ Pose2d TagPose = GetApriltagePose(TagId);
+
+ Pose2d RoboPose = RobotPose2D;
+
+ double distanceinMeters = RoboPose.getTranslation().getDistance(TagPose.getTranslation());
+
+ double distFT = Units.metersToFeet(distanceinMeters);
+
+ SmartDashboard.putNumber("Dist to Traget", distFT);
+
+return distFT;
+
+}
+
+
+
 public Rotation2d AbsRotationToTag(int TagId, Pose2d RobotPose2D){
 
   Pose2d TagPose = GetApriltagePose(TagId);
 
 Pose2d RoboPose = RobotPose2D;
 
+Translation2d targeTranslation2d = TagPose.getTranslation();
 
-Transform2d Transfrom = new Transform2d(RoboPose,TagPose);
-
-Transfrom.getRotation();
-
+Translation2d relativeTranslation = targeTranslation2d.minus(RoboPose.getTranslation());
 
 
+Rotation2d rotationtotarget = new Rotation2d(relativeTranslation.getX(),relativeTranslation.getY());
 
-    return Transfrom.getRotation();
+
+//Transform2d Transfrom = new Transform2d(RoboPose,TagPose);
+
+//SmartDashboard.putNumber("Rotation angle", Transfrom.getRotation().getDegrees());
+
+SmartDashboard.putString("Tag Pose",TagPose.toString());
+
+//Transfrom.getRotation();
+
+
+
+
+    //return Transfrom.getRotation();
+    return rotationtotarget;
 }
 
 public void periodic(){}
@@ -79,12 +113,12 @@ public void SetSpeakerTargetID(){
 if (ally.isPresent()) {
     if (ally.get() == Alliance.Red) {
         
-TargetID = 7;
+TargetID = 4;
 
     }
     if (ally.get() == Alliance.Blue) {
         
-      TargetID = 4;
+      TargetID = 7;
     }
 }
 else {

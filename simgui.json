@@ -1,12 +1,50 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "window": {
+        "visible": false
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
       "/SmartDashboard/Autonomous": "String Chooser",
       "/SmartDashboard/Feild": "Field2d"
+    },
+    "windows": {
+      "/FMSInfo": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/Feild": {
+        "bottom": 1476,
+        "height": 8.210550308227539,
+        "left": 150,
+        "right": 2961,
+        "top": 79,
+        "width": 16.541748046875,
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "transitory": {
+      "FMSInfo": {
+        "open": true
+      },
+      "SmartDashboard": {
+        "open": true
+      }
     }
   },
   "NetworkTables Info": {
+    "Server": {
+      "open": true
+    },
     "visible": true
   }
 }

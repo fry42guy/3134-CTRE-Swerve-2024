@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
+import com.ctre.phoenix6.mechanisms.swerve.utility.PhoenixPIDController;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 
@@ -61,6 +62,8 @@ public class RobotContainer
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); 
 
+      private final PhoenixPIDController turnPID = new PhoenixPIDController(3.2, 0.0, 0.0);
+
 
   
   // driver buttons
@@ -72,7 +75,7 @@ public class RobotContainer
   /* Subsystems */
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
  
-  private final CommandXboxController m_driverController =  new CommandXboxController(Constants.OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_driverController =  new CommandXboxController(0);//Constants.OperatorConstants.kDriverControllerPort);
 
   private final IntakeSubsystem   m_IntakeSubsystem   = new IntakeSubsystem();
   private final ArmSubsystem      m_ArmSubsystem      = new ArmSubsystem();
@@ -97,10 +100,12 @@ public class RobotContainer
       .withRotationalRate(Math.pow(-m_driverController.getRightX(),3) * MaxAngularRate) // Drive counterclockwise with negative X (left)
       ).ignoringDisable(true));
 
-
+driveFaceinangle.HeadingController = turnPID;
+driveFaceinangle.HeadingController.enableContinuousInput(-Math.PI, Math.PI);
 
 m_driverController.povLeft().toggleOnTrue(drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
 .withVelocityY(-Math.pow(m_driverController.getLeftX(),3) * MaxSpeed)
+
 .withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()))));
 
 
@@ -184,7 +189,7 @@ NamedCommands.registerCommand("Run_Note_Intake", new AutoIntakeNote(m_IntakeSubs
      m_chooser.addOption("Tripple Note", drivetrain.getAutoPath("Tripple Note"));
      m_chooser.addOption("Test Auto2", drivetrain.getAutoPath("Test Auto2"));
      m_chooser.addOption("Test Auto3", drivetrain.getAutoPath("Test Auto3"));
-     m_chooser.addOption("Test Auto4", drivetrain.getAutoPath("Test Auto4"));
+     //m_chooser.addOption("Test Auto4", drivetrain.getAutoPath("Test Auto4"));
      
     // m_chooser.addOption("(Right) Shoot, Drive Back and Intake", drivetrain.getAutoPath("!rsdin"));
     // m_chooser.addOption("3 Note Far, Towards Center", drivetrain.getAutoPath("3 Note Far"));
