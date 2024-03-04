@@ -107,7 +107,7 @@ driveFaceinangle.HeadingController.enableContinuousInput(-Math.PI, Math.PI);
 m_driverController.povLeft().toggleOnTrue(new ParallelCommandGroup( drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
 .withVelocityY(-Math.pow(m_driverController.getLeftX(),3) * MaxSpeed)
 
-.withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()))),
+.withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()).minus(drivetrain.Getoffsetroation()))),
 new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)
 ).until(m_driverController.axisGreaterThan(5,.125).or(m_driverController.axisLessThan(5,-.125))));
 
@@ -174,17 +174,21 @@ else {
 NamedCommands.registerCommand("AutoAim&Shoot", 
 new SequentialCommandGroup(
       (new AutoTargetPIDPivotCommand(m_ArmSubsystem,true)),
-      (new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem,4000,false,.5))
+      (new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem,4000,false,0.0))
     ));
 
 NamedCommands.registerCommand("AutoAim&ShootStop", 
   new SequentialCommandGroup(
       (new AutoTargetPIDPivotCommand(m_ArmSubsystem,true)),
-      (new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem,4000,true,.5))
+      (new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem,4000,true,0.0))
     ));
 
 NamedCommands.registerCommand("Arm_To_Zero", new AutoZeroPivotCommand(m_ArmSubsystem));
 NamedCommands.registerCommand("Run_Note_Intake", new AutoIntakeNote(m_IntakeSubsystem, 3  , .125));
+
+NamedCommands.registerCommand("Just Aim", new AutoTargetPIDPivotCommand(m_ArmSubsystem,true));
+
+
 }
 
 

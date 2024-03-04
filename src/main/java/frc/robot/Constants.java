@@ -15,7 +15,7 @@ public class Constants
   
     public static final class AutoConstants {
 
-        public static double shoottime = 1.0; // Time intake runs to shoot
+        public static double shoottime = .5; // Time intake runs to shoot
 
     }
 
@@ -32,8 +32,8 @@ public class Constants
       public static final int LeftPivotID = 49;
       public static final int RightPivotID = 47;
       public static final int EncoderPWMID = 9;
-      public static final double ArmUpSpeed = .75;
-      public static final double ArmDownSpeed = -.75;
+      public static final double ArmUpSpeed = 1.0;
+      public static final double ArmDownSpeed = -1.0;
     
       public static final double MAX_CURRENT_DRAW = 25;
     

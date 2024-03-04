@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 2.268910698958839,
-        "y": 4.143554827394014
+        "x": 2.4828970984956187,
+        "y": 3.9782017004792296
       },
       "prevControl": {
-        "x": 1.2689106989588437,
-        "y": 4.143554827394014
+        "x": 1.572430699088664,
+        "y": 4.249404457749387
       },
       "nextControl": {
-        "x": 2.4050838623004265,
-        "y": 4.143554827394014
+        "x": 2.5787356668542456,
+        "y": 3.9496540418192128
       },
       "isLocked": false,
       "linkedName": null
@@ -75,6 +75,23 @@
               "type": "named",
               "data": {
                 "name": "Run_Note_Intake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.3,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Just Aim"
               }
             }
           ]

@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_robotContainer = new RobotContainer();
 m_robotContainer.drivetrain.init();
-RobotContainer.m_ArmSubsystem.setpivotpoistion();
+
 RobotContainer.m_Calcs2.SetSpeakerTargetID();
     
    
@@ -53,10 +53,21 @@ m_robotContainer.m_Calcs2.getDistTo_Tag(m_robotContainer.m_Calcs2.TargetID,m_rob
   }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+
+
+
+
+
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+
+    if (!RobotContainer.m_ArmSubsystem.encoderupdated)
+
+    RobotContainer.m_ArmSubsystem.setpivotpoistion();
+  }
 
   @Override
   public void disabledExit() {}
@@ -75,7 +86,11 @@ m_robotContainer.m_Calcs2.getDistTo_Tag(m_robotContainer.m_Calcs2.TargetID,m_rob
   }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+
+//m_robotContainer.drivetrain.LimelightUpdatePose(); //////////////////////////////////////////////////////////
+
+  }
 
   @Override
   public void autonomousExit() {

@@ -38,7 +38,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   private final double MaxCurrent;
 
- private boolean encoderupdated = false;
+ public boolean encoderupdated = false;
 
  private DutyCycleOut m_DutyCycle = new DutyCycleOut(0);
   
@@ -163,11 +163,12 @@ if (!m_RevLimit.get()) {
     public double Calibrate_Arm_Encoder_To_Hex_Encoder(){
 
       double inputangle = HexEncoder.getAbsolutePosition();
+      
 if (inputangle < .25 && encoderupdated == false) {
 
 
   
-  Timer.delay(3);
+  //Timer.delay(3);
   inputangle = HexEncoder.getAbsolutePosition();
 
   encoderupdated = true; 

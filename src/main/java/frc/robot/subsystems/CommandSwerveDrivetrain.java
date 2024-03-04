@@ -40,7 +40,12 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     private double m_lastSimTime;
 
     
+ /* Blue alliance sees forward as 0 degrees (toward red alliance wall) */
+ private final Rotation2d BlueAlliancePerspectiveRotation = Rotation2d.fromDegrees(0);
+ /* Red alliance sees forward as 180 degrees (toward blue alliance wall) */
+ private final Rotation2d RedAlliancePerspectiveRotation = Rotation2d.fromDegrees(180);
 
+ private boolean hasAppliedOperatorPerspective = false;
    
 
       private final Field2d m_feild = new Field2d();
@@ -131,7 +136,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 m_feild.setRobotPose(getrobotpose());
         SmartDashboard.putData("Feild", m_feild);
 
-
+//Updateoperatorperspective();
        
 
 
@@ -178,23 +183,25 @@ return m_odometry.getEstimatedPosition();
      
     }
 
-// public void Uppdateseededroation(){
+public Rotation2d Getoffsetroation(){
 
-//      LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+   return this.m_fieldRelativeOffset;
+}
 
-// if (isRedAlliance()){
 
-// this.setOperatorPerspectiveForward(new Rotation2d (Units.degreesToRadians( 180)).plus(limelightMeasurement.pose.getRotation()));
+//  public void Updateoperatorperspective(){
 
-// }
-
-// if (!isRedAlliance()){
-
-// this.seedFieldRelative(limelightMeasurement.pose);
-
-// }
-
-// }
+//     if (!hasAppliedOperatorPerspective || DriverStation.isDisabled()) {
+//         DriverStation.getAlliance()
+//             .ifPresent(
+//                 (allianceColor) -> {
+//                   this.setOperatorPerspectiveForward(
+//                       allianceColor == Alliance.Red
+//                           ? RedAlliancePerspectiveRotation
+//                           : BlueAlliancePerspectiveRotation);
+//                   hasAppliedOperatorPerspective = true;
+//                 });
+//             }}
 
 
 }

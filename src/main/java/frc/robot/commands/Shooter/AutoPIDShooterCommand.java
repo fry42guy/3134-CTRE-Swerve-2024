@@ -74,6 +74,8 @@ shoottime.stop();
 
 Delaytimer.reset();
 Delaytimer.stop();
+DelayBool = false;
+
 
 timerruning = false;
 

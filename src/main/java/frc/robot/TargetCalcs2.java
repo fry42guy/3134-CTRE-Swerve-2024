@@ -93,23 +93,23 @@ Optional<Alliance> ally = DriverStation.getAlliance();
 
 Rotation2d offsetrotation;
 
-// if (ally.get() == Alliance.Red){
+ if (ally.get() == Alliance.Red){
 
-// offsetrotation = new Rotation2d(Units.degreesToRadians(185));
+ offsetrotation = new Rotation2d(Units.degreesToRadians(5));
 
-// }
+ }
 
-// if (ally.get() == Alliance.Blue){
+ if (ally.get() == Alliance.Blue){
 
-// offsetrotation = new Rotation2d(Units.degreesToRadians(175));
+offsetrotation = new Rotation2d(Units.degreesToRadians(175));
 
-// }
+}
 
-//else {
+else {
   offsetrotation = new Rotation2d(Units.degreesToRadians(175));
-//}
+}
 
-
+System.out.println(ally.get());
 
     return rotationtotarget.plus(offsetrotation);
 }
