@@ -5,13 +5,9 @@
 package frc.robot;
 
 
-import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 
 public class Robot extends TimedRobot {
@@ -19,6 +15,7 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+ 
   
   //private final Field2d m_feild = new Field2d();
   
@@ -39,10 +36,13 @@ m_robotContainer.m_Calcs2.SetSpeakerTargetID();
   public void robotPeriodic() {
     CommandScheduler.getInstance().run(); 
 
+   
+
     if (m_robotContainer.m_Calcs2.TargetID == -5){
 
 m_robotContainer.m_Calcs2.SetSpeakerTargetID();
 
+m_robotContainer.drivetrain.addVisionMeasurement(null, kDefaultPeriod);
 
 
     }
@@ -89,7 +89,12 @@ m_robotContainer.m_Calcs2.getDistTo_Tag(m_robotContainer.m_Calcs2.TargetID,m_rob
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+
+
+m_robotContainer.m_Calcs2.LimelightUpdatePose();
+
+  }
 
   @Override
   public void teleopExit() {

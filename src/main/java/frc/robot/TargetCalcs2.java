@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -14,6 +15,8 @@ import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.LimelightHelpers;
+import frc.robot.subsystems.LimelightHelpers.PoseEstimate;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +28,8 @@ import edu.wpi.first.apriltag.AprilTagFieldLayout;
 /** Add your docs here. */
 public class TargetCalcs2 {
 public AprilTagFieldLayout Layout;
+
+public LimelightHelpers m_visionSystem;
 
 public AprilTag targeTag;
 
@@ -128,5 +133,33 @@ else {
 }
 
 }
+
+
+
+
+
+
+public void LimelightUpdatePose(){
+
+  PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+  
+  SmartDashboard.putNumber("Limelight Feild Pos",limelightMeasurement.pose.getX());
+
+  //SmartDashboard.putString("BluePOS", LimelightHelpers.getBotPose2d_wpiBlue("limelight").);
+  
+   SmartDashboard.putString("Tag Count", limelightMeasurement.toString());
+  if(limelightMeasurement.tagCount >= 1)
+  {
+    // this.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
+    // this.addVisionMeasurement(
+    //     limelightMeasurement.pose,
+    //     limelightMeasurement.timestampSeconds);
+
+        
+    
+  }
+}
+
+
 
 }
