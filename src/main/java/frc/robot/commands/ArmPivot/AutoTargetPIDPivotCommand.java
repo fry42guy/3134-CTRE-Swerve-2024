@@ -10,7 +10,8 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.TargetCalcs;
+import frc.robot.RobotContainer;
+import frc.robot.TargetCalcs2;
 import frc.robot.subsystems.ArmSubsystem;
 
 public class AutoTargetPIDPivotCommand extends Command {
@@ -20,15 +21,17 @@ public class AutoTargetPIDPivotCommand extends Command {
   private double setPoint;
   private PositionVoltage m_armPositionVoltage;
   
-private TargetCalcs m_Calcs;
+private TargetCalcs2 m_Calcs2;
 
-  public AutoTargetPIDPivotCommand(ArmSubsystem m_ArmSubsystem) {
+private boolean withEnd;
+
+  public AutoTargetPIDPivotCommand(ArmSubsystem m_ArmSubsystem, Boolean withEnd) {
     this.m_ArmSubsystem = m_ArmSubsystem;
-  
+  this.withEnd = withEnd;
    // m_PivotPIDController.enableContinuousInput(-1, 1);
     m_armPositionVoltage = new PositionVoltage(0);
     
-m_Calcs = new TargetCalcs();
+m_Calcs2 = RobotContainer.m_Calcs2;
    
     addRequirements(m_ArmSubsystem);
 
@@ -53,7 +56,7 @@ configTalon();
 
  {
 
-  setPoint = m_Calcs.CalcArmEncoderViaTarget(7);
+  setPoint = m_Calcs2.absbyPostSetpointSpeaker();
 
 
   SmartDashboard.putNumber("Arm Setpoint Auto", setPoint);
@@ -81,10 +84,13 @@ configTalon();
   @Override
   public boolean isFinished() {
     
+
+if (withEnd){
+
     if (setPoint+.05 > m_ArmSubsystem.PivotMotor.getPosition().getValueAsDouble() && m_ArmSubsystem.PivotMotor.getPosition().getValueAsDouble() > setPoint -.05){
 
       return true;
-    }
+    }}
           
     return false;
 

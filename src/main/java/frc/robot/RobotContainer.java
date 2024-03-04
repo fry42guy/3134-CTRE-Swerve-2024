@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -62,7 +63,7 @@ public class RobotContainer
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); 
 
-      private final PhoenixPIDController turnPID = new PhoenixPIDController(3.2, 0.0, 0.0);
+      private final PhoenixPIDController turnPID = new PhoenixPIDController(10, 1, 0.0); //3.2
 
 
   
@@ -78,13 +79,13 @@ public class RobotContainer
   private final CommandXboxController m_driverController =  new CommandXboxController(0);//Constants.OperatorConstants.kDriverControllerPort);
 
   private final IntakeSubsystem   m_IntakeSubsystem   = new IntakeSubsystem();
-  private final ArmSubsystem      m_ArmSubsystem      = new ArmSubsystem();
+  public  static ArmSubsystem      m_ArmSubsystem      = new ArmSubsystem();
   private final ShooterSubsystem  m_ShooterSubsystem  = new ShooterSubsystem();
   //private final LimelightHelpers  m_Limelight         = new LimelightHelpers();
   public static ClimberSubsystem  m_ClimberSubsystem  = new ClimberSubsystem();
   public static TargetCalcs       m_Calcs             = new TargetCalcs();
 
-  public final TargetCalcs2       m_Calcs2             = new TargetCalcs2();
+  public static TargetCalcs2       m_Calcs2             = new TargetCalcs2();
 
   /* Auto List */
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -103,18 +104,20 @@ public class RobotContainer
 driveFaceinangle.HeadingController = turnPID;
 driveFaceinangle.HeadingController.enableContinuousInput(-Math.PI, Math.PI);
 
-m_driverController.povLeft().toggleOnTrue(drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
+m_driverController.povLeft().toggleOnTrue(new ParallelCommandGroup( drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
 .withVelocityY(-Math.pow(m_driverController.getLeftX(),3) * MaxSpeed)
 
-.withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()))));
+.withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()))),
+new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)
+).until(m_driverController.axisGreaterThan(5,.125).or(m_driverController.axisLessThan(5,-.125))));
 
 
     //m_driverController.a().whileTrue(drivetrain.applyRequest(() -> brake));
     m_driverController.back().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     //m_driverController.povUp().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0.5).withVelocityY(0)));
     //m_driverController.povDown().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-0.5).withVelocityY(0)));
-    m_driverController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.SlowSpeed,true));
-    m_driverController.axisGreaterThan(XboxController.Axis.kLeftTrigger.value, .05).whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.FastSpeed,true));
+    m_driverController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.SlowSpeed,true,.5));
+    m_driverController.axisGreaterThan(XboxController.Axis.kLeftTrigger.value, .05).whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.FastSpeed,true,.5));
     m_driverController.rightStick().whileTrue(new ArmDown(m_ArmSubsystem)); 
     m_driverController.leftStick().whileTrue(new ArmUP(m_ArmSubsystem));                                                                   
     m_driverController.rightBumper().whileTrue(new IntakeFWDWithSensor(m_IntakeSubsystem));
@@ -126,6 +129,8 @@ m_driverController.povLeft().toggleOnTrue(drivetrain.applyRequest(() -> driveFac
     m_driverController.y().whileTrue(new AutoIntakeNote(m_IntakeSubsystem, 2  , 0.125));
     m_driverController.b().onTrue(m_ArmSubsystem.runOnce(() -> m_ArmSubsystem.ZeroPivotPositon()));
 
+
+   // m_driverController.povRight().onTrue(drivetrain.runOnce(()-> drivetrain.Uppdateseededroation()));
 
 
 
@@ -168,14 +173,14 @@ NamedCommands.registerCommand("Arm_To_Zero",new PrintCommand("Arm_To_Zero"));
 else {
 NamedCommands.registerCommand("AutoAim&Shoot", 
 new SequentialCommandGroup(
-      (new AutoTargetPIDPivotCommand(m_ArmSubsystem)),
-      (new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem,4000,false))
+      (new AutoTargetPIDPivotCommand(m_ArmSubsystem,true)),
+      (new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem,4000,false,.5))
     ));
 
 NamedCommands.registerCommand("AutoAim&ShootStop", 
   new SequentialCommandGroup(
-      (new AutoTargetPIDPivotCommand(m_ArmSubsystem)),
-      (new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem,4000,true))
+      (new AutoTargetPIDPivotCommand(m_ArmSubsystem,true)),
+      (new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem,4000,true,.5))
     ));
 
 NamedCommands.registerCommand("Arm_To_Zero", new AutoZeroPivotCommand(m_ArmSubsystem));

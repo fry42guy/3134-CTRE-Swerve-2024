@@ -14,9 +14,10 @@ import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.math.VecBuilder;
-import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotController;
@@ -25,6 +26,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.LimelightHelpers;
+import frc.robot.TargetCalcs2;
 import frc.robot.generated.TunerConstants;
 
 /**
@@ -127,6 +130,15 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
         
 m_feild.setRobotPose(getrobotpose());
         SmartDashboard.putData("Feild", m_feild);
+
+
+       
+
+
+
+
+
+
     }
 
 
@@ -141,10 +153,48 @@ return m_odometry.getEstimatedPosition();
 
 
 
-    
+    public void LimelightUpdatePose(){
+
+        LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+       
+       
+       
+     
+       // //SmartDashboard.putString("BluePOS", LimelightHelpers.getBotPose2d_wpiBlue("limelight").);
+       
+       
+     
+     
+       if(limelightMeasurement.tagCount >= 2)
+       {
+         this.setVisionMeasurementStdDevs(VecBuilder.fill(1,1,1));//.7,.7,9999999));
+         this.addVisionMeasurement(
+             limelightMeasurement.pose,
+             limelightMeasurement.timestampSeconds);
+     
+             
+         
+       }
+     
+    }
+
+// public void Uppdateseededroation(){
+
+//      LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+
+// if (isRedAlliance()){
+
+// this.setOperatorPerspectiveForward(new Rotation2d (Units.degreesToRadians( 180)).plus(limelightMeasurement.pose.getRotation()));
+
+// }
+
+// if (!isRedAlliance()){
+
+// this.seedFieldRelative(limelightMeasurement.pose);
+
+// }
+
+// }
 
 
-
-
-    
 }

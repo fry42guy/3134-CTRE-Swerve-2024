@@ -23,18 +23,22 @@ public class AutoPIDShooterCommand extends Command {
 
   private boolean timerruning; 
 
+  private boolean DelayBool;
+
   private Timer shoottime;
+
+  private Timer Delaytimer;
 
   private IntakeSubsystem m_IntakeSubsystem;
   
   private VelocityVoltage m_LeftVelocityVoltage;
 private VelocityVoltage m_RightVelocityVoltage;
 
-
+private double StableDelay;
 private boolean withstop;
 
 
-  public AutoPIDShooterCommand(ShooterSubsystem m_ShooterSubsystem,IntakeSubsystem m_IntakeSubsystem, double rpmspeed,boolean YeswithStop) {
+  public AutoPIDShooterCommand(ShooterSubsystem m_ShooterSubsystem,IntakeSubsystem m_IntakeSubsystem, double rpmspeed,boolean YeswithStop , Double StableDelay) {
     this.m_ShooterSubsystem = m_ShooterSubsystem;
     this.m_IntakeSubsystem = m_IntakeSubsystem;
     this.withstop = YeswithStop;
@@ -44,10 +48,14 @@ private boolean withstop;
     this.setPoint = rpmspeed;
     m_LeftVelocityVoltage = new VelocityVoltage(0);
      m_RightVelocityVoltage = new VelocityVoltage(0);
-
+this.StableDelay = StableDelay;
      timerruning =false;
+
+     DelayBool = false;
    
 shoottime = new Timer();
+
+Delaytimer = new Timer();
 
     addRequirements(m_ShooterSubsystem,m_IntakeSubsystem);
 
@@ -62,6 +70,12 @@ shoottime = new Timer();
   public void initialize() {
 
 shoottime.reset();
+shoottime.stop();
+
+Delaytimer.reset();
+Delaytimer.stop();
+
+timerruning = false;
 
     m_ShooterSubsystem.PIDSetup();
 
@@ -95,23 +109,37 @@ configRightTalon();
     SmartDashboard.putNumber("LeftShooter output: ", m_ShooterSubsystem.LeftShooter.getMotorVoltage().getValueAsDouble());
     SmartDashboard.putNumber("RightShooter output: ", m_ShooterSubsystem.RightShooter.getMotorVoltage().getValueAsDouble());
 
-    if (setPoint * 1.05 > m_ShooterSubsystem.GetLeftShooterRPM() && m_ShooterSubsystem.GetLeftShooterRPM() > setPoint *0.95){
+    if (setPoint * 1.05 > m_ShooterSubsystem.GetLeftShooterRPM() && m_ShooterSubsystem.GetLeftShooterRPM() > setPoint *0.95 && !DelayBool){
 
+DelayBool = true;
+Delaytimer.restart();
+    }
+
+    if (setPoint * 1.05 < m_ShooterSubsystem.GetLeftShooterRPM() && DelayBool || m_ShooterSubsystem.GetLeftShooterRPM() < setPoint *0.95 && DelayBool ){
+
+DelayBool = false;
+Delaytimer.reset();
+Delaytimer.stop();
+    }
+
+
+     if (setPoint * 1.05 > m_ShooterSubsystem.GetLeftShooterRPM() && m_ShooterSubsystem.GetLeftShooterRPM() > setPoint *0.95 && Delaytimer.get() > StableDelay ){
 
 m_IntakeSubsystem.setspeed(Constants.Intake.FWDSpeed);
-
-System.out.println(shoottime.get());
+     
+//System.out.println(shoottime.get());
 
 if (timerruning == false){
 
-  shoottime.start();
+  shoottime.restart();
   timerruning = true;
   
 }
+     }
 
-
-    }
-    //System.out.println(m_ShooterSubsystem.GetLeftShooterRPM());
+    
+    System.out.println(shoottime.get());
+    System.out.println(timerruning);
     //System.out.println(LeftsetPoint);
     //System.out.println(speed);
    //System.out.println(KP);

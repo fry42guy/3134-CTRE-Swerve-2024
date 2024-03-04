@@ -8,15 +8,12 @@ import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Transform2d;
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.Unit;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.LimelightHelpers;
-import frc.robot.subsystems.LimelightHelpers.PoseEstimate;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +31,8 @@ public LimelightHelpers m_visionSystem;
 public AprilTag targeTag;
 
 public Integer TargetID;
+
+private Pose2d TCUPose2d;
 
 
 public TargetCalcs2(){
@@ -82,33 +81,72 @@ return distFT;
 
 
 public Rotation2d AbsRotationToTag(int TagId, Pose2d RobotPose2D){
-
   Pose2d TagPose = GetApriltagePose(TagId);
-
 Pose2d RoboPose = RobotPose2D;
-
 Translation2d targeTranslation2d = TagPose.getTranslation();
-
 Translation2d relativeTranslation = targeTranslation2d.minus(RoboPose.getTranslation());
-
-
 Rotation2d rotationtotarget = new Rotation2d(relativeTranslation.getX(),relativeTranslation.getY());
-
-
-//Transform2d Transfrom = new Transform2d(RoboPose,TagPose);
-
-//SmartDashboard.putNumber("Rotation angle", Transfrom.getRotation().getDegrees());
-
+SmartDashboard.putNumber("Rotation angle", rotationtotarget.getDegrees());
 SmartDashboard.putString("Tag Pose",TagPose.toString());
 
-//Transfrom.getRotation();
+Optional<Alliance> ally = DriverStation.getAlliance();
+
+Rotation2d offsetrotation;
+
+// if (ally.get() == Alliance.Red){
+
+// offsetrotation = new Rotation2d(Units.degreesToRadians(185));
+
+// }
+
+// if (ally.get() == Alliance.Blue){
+
+// offsetrotation = new Rotation2d(Units.degreesToRadians(175));
+
+// }
+
+//else {
+  offsetrotation = new Rotation2d(Units.degreesToRadians(175));
+//}
 
 
 
-
-    //return Transfrom.getRotation();
-    return rotationtotarget;
+    return rotationtotarget.plus(offsetrotation);
 }
+
+
+public double AbsDistToSpeaker(Pose2d RobotPose2D){
+  Pose2d TagPose = GetApriltagePose(TargetID);
+Pose2d RoboPose = RobotPose2D;
+// Translation2d targeTranslation2d = TagPose.getTranslation();
+// Translation2d relativeTranslation = targeTranslation2d.minus(RoboPose.getTranslation());
+// Double dist = relativeTranslation.getDistance(relativeTranslation);
+
+double Dx = Math.abs(RoboPose.getX() - TagPose.getX());
+double Dy = Math.abs(RoboPose.getY() - TagPose.getY());
+
+double dist = Math.sqrt((Math.pow(Dx, 2)+ Math.pow(Dy, 2)));
+
+SmartDashboard.putNumber("Abs Dist to Target Meters", dist);
+
+    return dist;
+}
+
+public double absbyPostSetpointSpeaker(){
+
+
+  Pose2d RobotPose2D = TCUPose2d;
+
+double dist = AbsDistToSpeaker(RobotPose2D);
+
+Double ArmSetpoint = ((0.2403 * Math.pow(dist,4)) + (- 3.4518 * Math.pow(dist,3)) + (12.502 * Math.pow(dist,2)) + (18.124 * dist) + (-27.503))  ;         //y = 0.2403x4 - 3.4518x3 + 12.502x2 + 18.124x - 27.503
+
+  return ArmSetpoint;
+
+}
+
+
+
 
 public void periodic(){}
 
@@ -141,25 +179,42 @@ else {
 
 public void LimelightUpdatePose(){
 
-  PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+   LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
   
-  SmartDashboard.putNumber("Limelight Feild Pos",limelightMeasurement.pose.getX());
+  
+   SmartDashboard.putNumber("Limelight Feild Pos",limelightMeasurement.pose.getX());
 
-  //SmartDashboard.putString("BluePOS", LimelightHelpers.getBotPose2d_wpiBlue("limelight").);
+  // //SmartDashboard.putString("BluePOS", LimelightHelpers.getBotPose2d_wpiBlue("limelight").);
   
-   SmartDashboard.putString("Tag Count", limelightMeasurement.toString());
-  if(limelightMeasurement.tagCount >= 1)
-  {
-    // this.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
-    // this.addVisionMeasurement(
-    //     limelightMeasurement.pose,
-    //     limelightMeasurement.timestampSeconds);
+   SmartDashboard.putNumber("Tag Count", limelightMeasurement.tagCount);
+
+
+  // if(limelightMeasurement.tagCount >= 2)
+  // {
+  //   // this.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
+  //   // this.addVisionMeasurement(
+  //   //     limelightMeasurement.pose,
+  //   //     limelightMeasurement.timestampSeconds);
 
         
     
-  }
-}
+  // }
 
+   
+
+
+
+
+ }
+
+
+ public void UpdateLocalPose(Pose2d RobotPose2d){
+
+
+  TCUPose2d = RobotPose2d ; 
+
+
+ }
 
 
 }
