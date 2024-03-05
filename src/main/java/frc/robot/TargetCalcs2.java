@@ -95,7 +95,7 @@ Rotation2d offsetrotation;
 
  if (ally.get() == Alliance.Red){
 
- offsetrotation = new Rotation2d(Units.degreesToRadians(5));
+ offsetrotation = new Rotation2d(Units.degreesToRadians(-5));
 
  }
 
