@@ -82,11 +82,11 @@ public double GetLeftShooterRPM(){
 public void PIDSetup(){
 
 if (SmartDashboard.containsKey("LeftShooter(PID) KP")==false){
-SmartDashboard.putNumber("LeftShooter(PID) KP", 0.7);
+SmartDashboard.putNumber("LeftShooter(PID) KP", 0.4);
 }
 
 if (SmartDashboard.containsKey("LeftShooter(PID) KI") ==false){
-  SmartDashboard.putNumber("LeftShooter(PID) KI", 4.0);
+  SmartDashboard.putNumber("LeftShooter(PID) KI", 5.0);
   }
 
   if (SmartDashboard.containsKey("LeftShooter(PID) KD")==false){
@@ -103,8 +103,8 @@ if (SmartDashboard.containsKey("LeftShooter(PID) KI") ==false){
 
 public void PIDUpdate(){
 
-  KP = SmartDashboard.getNumber("LeftShooter(PID) KP", 0.7);
-  KI = SmartDashboard.getNumber("LeftShooter(PID) KI", 4);
+  KP = SmartDashboard.getNumber("LeftShooter(PID) KP", 0.4);
+  KI = SmartDashboard.getNumber("LeftShooter(PID) KI", 5);
   KD = SmartDashboard.getNumber("LeftShooter(PID) KD", 0.0);
   PIDTESTspeed = SmartDashboard.getNumber("TEST PID (RPM) Speed", 0.0);
 

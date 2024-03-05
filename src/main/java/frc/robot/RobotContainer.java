@@ -116,8 +116,8 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)
     m_driverController.back().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     //m_driverController.povUp().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(0.5).withVelocityY(0)));
     //m_driverController.povDown().whileTrue(drivetrain.applyRequest(() -> forwardStraight.withVelocityX(-0.5).withVelocityY(0)));
-    m_driverController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.SlowSpeed,true,.5));
-    m_driverController.axisGreaterThan(XboxController.Axis.kLeftTrigger.value, .05).whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.FastSpeed,true,.5));
+    m_driverController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.SlowSpeed,true,0.0));
+    m_driverController.axisGreaterThan(XboxController.Axis.kLeftTrigger.value, .05).whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.FastSpeed,true,.25));
     m_driverController.y().whileTrue(new ArmDown(m_ArmSubsystem)); 
     m_driverController.leftStick().whileTrue(new ArmUP(m_ArmSubsystem));                                                                   
     m_driverController.rightBumper().whileTrue(new IntakeFWDWithSensor(m_IntakeSubsystem));
@@ -128,7 +128,7 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)
     m_driverController.a().onTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
    // m_driverController.y().whileTrue(new AutoIntakeNote(m_IntakeSubsystem, 2  , 0.125));
     m_driverController.b().onTrue(m_ArmSubsystem.runOnce(() -> m_ArmSubsystem.ZeroPivotPositon()));
-    
+
 
 
    // m_driverController.povRight().onTrue(drivetrain.runOnce(()-> drivetrain.Uppdateseededroation()));
