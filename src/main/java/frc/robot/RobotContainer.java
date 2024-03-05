@@ -128,6 +128,7 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)
     m_driverController.a().onTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
    // m_driverController.y().whileTrue(new AutoIntakeNote(m_IntakeSubsystem, 2  , 0.125));
     m_driverController.b().onTrue(m_ArmSubsystem.runOnce(() -> m_ArmSubsystem.ZeroPivotPositon()));
+    
 
 
    // m_driverController.povRight().onTrue(drivetrain.runOnce(()-> drivetrain.Uppdateseededroation()));
