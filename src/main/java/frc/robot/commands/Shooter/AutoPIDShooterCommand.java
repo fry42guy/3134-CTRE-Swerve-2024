@@ -29,6 +29,8 @@ public class AutoPIDShooterCommand extends Command {
 
   private Timer Delaytimer;
 
+  private Double Tolrance;
+
   private IntakeSubsystem m_IntakeSubsystem;
   
   private VelocityVoltage m_LeftVelocityVoltage;
@@ -57,6 +59,17 @@ shoottime = new Timer();
 
 Delaytimer = new Timer();
 
+
+if (setPoint < 2000){
+
+  Tolrance = .5; }
+  else
+  {
+    Tolrance = .05; 
+}
+
+
+
     addRequirements(m_ShooterSubsystem,m_IntakeSubsystem);
 
     
@@ -75,6 +88,8 @@ shoottime.stop();
 Delaytimer.reset();
 Delaytimer.stop();
 DelayBool = false;
+
+
 
 
 timerruning = false;
@@ -111,13 +126,13 @@ configRightTalon();
     SmartDashboard.putNumber("LeftShooter output: ", m_ShooterSubsystem.LeftShooter.getMotorVoltage().getValueAsDouble());
     SmartDashboard.putNumber("RightShooter output: ", m_ShooterSubsystem.RightShooter.getMotorVoltage().getValueAsDouble());
 
-    if (setPoint * 1.05 > m_ShooterSubsystem.GetLeftShooterRPM() && m_ShooterSubsystem.GetLeftShooterRPM() > setPoint *0.95 && !DelayBool){
+    if (setPoint * (1+Tolrance) > m_ShooterSubsystem.GetLeftShooterRPM() && m_ShooterSubsystem.GetLeftShooterRPM() > setPoint * (1-Tolrance) && !DelayBool){
 
 DelayBool = true;
 Delaytimer.restart();
     }
 
-    if (setPoint * 1.05 < m_ShooterSubsystem.GetLeftShooterRPM() && DelayBool || m_ShooterSubsystem.GetLeftShooterRPM() < setPoint *0.95 && DelayBool ){
+    if (setPoint * (1+Tolrance) < m_ShooterSubsystem.GetLeftShooterRPM() && DelayBool || m_ShooterSubsystem.GetLeftShooterRPM() < setPoint *(1-Tolrance) && DelayBool ){
 
 DelayBool = false;
 Delaytimer.reset();
@@ -125,7 +140,7 @@ Delaytimer.stop();
     }
 
 
-     if (setPoint * 1.05 > m_ShooterSubsystem.GetLeftShooterRPM() && m_ShooterSubsystem.GetLeftShooterRPM() > setPoint *0.95 && Delaytimer.get() > StableDelay ){
+     if (setPoint * (1+Tolrance)> m_ShooterSubsystem.GetLeftShooterRPM() && m_ShooterSubsystem.GetLeftShooterRPM() > setPoint *(1-Tolrance) && Delaytimer.get() > StableDelay ){
 
 m_IntakeSubsystem.setspeed(Constants.Intake.FWDSpeed);
      
