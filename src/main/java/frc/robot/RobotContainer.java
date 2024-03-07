@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 import com.ctre.phoenix6.Utils;
+
+import frc.robot.commands.Rumble_Time;
 import frc.robot.commands.ArmPivot.ArmDown;
 import frc.robot.commands.ArmPivot.ArmUP;
 import frc.robot.commands.ArmPivot.AutoTargetPIDPivotCommand;
@@ -76,7 +78,10 @@ public class RobotContainer
   /* Subsystems */
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
  
-  private final CommandXboxController m_driverController =  new CommandXboxController(0);//Constants.OperatorConstants.kDriverControllerPort);
+  public final CommandXboxController m_driverController =  new CommandXboxController(0);//Constants.OperatorConstants.kDriverControllerPort);
+
+
+
 
   private final IntakeSubsystem   m_IntakeSubsystem   = new IntakeSubsystem();
   public  static ArmSubsystem      m_ArmSubsystem      = new ArmSubsystem();
@@ -119,8 +124,14 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)
     m_driverController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.SlowSpeed,true,0.0));
     m_driverController.axisGreaterThan(XboxController.Axis.kLeftTrigger.value, .05).whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem, Constants.Shooter.FastSpeed,true,.25));
     m_driverController.y().whileTrue(new ArmDown(m_ArmSubsystem)); 
-    m_driverController.leftStick().whileTrue(new ArmUP(m_ArmSubsystem));                                                                   
-    m_driverController.rightBumper().whileTrue(new IntakeFWDWithSensor(m_IntakeSubsystem));
+    m_driverController.leftStick().whileTrue(new ArmUP(m_ArmSubsystem));  
+
+    m_driverController.rightBumper().whileTrue( new SequentialCommandGroup(  new IntakeFWDWithSensor(m_IntakeSubsystem),
+    new Rumble_Time(2.0)));
+
+
+
+
     m_driverController.axisGreaterThan(XboxController.Axis.kRightTrigger.value, .05).whileTrue(new IntakeREV(m_IntakeSubsystem));
     m_driverController.povUp().whileTrue(new ClimberFWD(m_ClimberSubsystem));
     m_driverController.povDown().whileTrue(new ClimberREV(m_ClimberSubsystem));

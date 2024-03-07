@@ -30,6 +30,7 @@ public class IntakeFWDWithSensor extends Command {
 if (m_IntakeSubsystem.Note_In_Intake()){
           // if (m_ShooterSubsystem.getisActive() == false){
   m_IntakeSubsystem.Stop();
+  
 }
     else {
 m_IntakeSubsystem.setspeed(Constants.Intake.FWDSpeed);
@@ -46,6 +47,13 @@ m_IntakeSubsystem.setspeed(Constants.Intake.FWDSpeed);
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (m_IntakeSubsystem.Note_In_Intake()){
+
+
+
+      
+      return true;
+    }
     return false;
   }
 }
