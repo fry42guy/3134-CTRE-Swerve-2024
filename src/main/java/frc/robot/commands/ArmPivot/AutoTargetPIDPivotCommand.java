@@ -108,7 +108,7 @@ public void configTalon(){
 
 TalonFXConfiguration ArmCofig = new TalonFXConfiguration();
 //Rightconfig.Slot0.kV = 0.12;
-ArmCofig.Slot0.kP = 2;
+ArmCofig.Slot0.kP = 3;
 ArmCofig.Slot0.kI = 1;
 ArmCofig.Slot0.kD = 0;
 

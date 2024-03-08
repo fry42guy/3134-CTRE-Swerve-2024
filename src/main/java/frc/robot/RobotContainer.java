@@ -206,10 +206,10 @@ NamedCommands.registerCommand("Just Aim", new AutoTargetPIDPivotCommand(m_ArmSub
 
     configureBindings();
     SmartDashboard.putData("Autonomous", m_chooser);
-    m_chooser.setDefaultOption("Test Auto1", drivetrain.getAutoPath("Test Auto1"));
+    m_chooser.setDefaultOption("Untested drive long", drivetrain.getAutoPath("Test Auto1"));
      m_chooser.addOption("Tripple Note", drivetrain.getAutoPath("Tripple Note"));
-     m_chooser.addOption("Test Auto2", drivetrain.getAutoPath("Test Auto2"));
-     m_chooser.addOption("Test Auto3", drivetrain.getAutoPath("Test Auto3"));
+     m_chooser.addOption("Drive Back", drivetrain.getAutoPath("Test Auto2"));
+     m_chooser.addOption("Quad Note", drivetrain.getAutoPath("Test Auto3"));
      //m_chooser.addOption("Test Auto4", drivetrain.getAutoPath("Test Auto4"));
      
     // m_chooser.addOption("(Right) Shoot, Drive Back and Intake", drivetrain.getAutoPath("!rsdin"));

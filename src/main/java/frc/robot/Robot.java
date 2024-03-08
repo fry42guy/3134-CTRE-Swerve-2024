@@ -44,7 +44,7 @@ RobotContainer.m_Calcs2.SetSpeakerTargetID();
 
 m_robotContainer.m_Calcs2.SetSpeakerTargetID();
 
-m_robotContainer.drivetrain.addVisionMeasurement(null, kDefaultPeriod);
+//m_robotContainer.drivetrain.addVisionMeasurement(null, kDefaultPeriod);
 
 
     }
@@ -110,7 +110,7 @@ m_robotContainer.m_Calcs2.getDistTo_Tag(m_robotContainer.m_Calcs2.TargetID,m_rob
   public void teleopPeriodic() {
 
 
-m_robotContainer.drivetrain.LimelightUpdatePose();
+//m_robotContainer.drivetrain.LimelightUpdatePose();
 
 m_robotContainer.m_Calcs2.AbsDistToSpeaker(m_robotContainer.drivetrain.getrobotpose());
 

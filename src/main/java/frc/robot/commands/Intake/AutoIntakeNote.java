@@ -117,6 +117,9 @@ revphase = false;
       return true;
     }
 
+     if (m_IntakeSubsystem.Note_In_Intake()){
+return true;
+     }
 
 
 

@@ -134,7 +134,14 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     public void periodic(){
         
 m_feild.setRobotPose(getrobotpose());
-        SmartDashboard.putData("Feild", m_feild);
+      //  SmartDashboard.putData("Feild", m_feild);
+
+
+
+        if (DriverStation.isTeleopEnabled()){
+LimelightUpdatePose();
+
+        }
 
 //Updateoperatorperspective();
        
@@ -165,9 +172,9 @@ return m_odometry.getEstimatedPosition();
        
        
      
-       // //SmartDashboard.putString("BluePOS", LimelightHelpers.getBotPose2d_wpiBlue("limelight").);
+       //SmartDashboard.putString("BluePOS", LimelightHelpers.getBotPose2d_wpiBlue("limelight").);
        
-       
+       System.out.println("LimelightRunning");
      
      
        if(limelightMeasurement.tagCount >= 2)
