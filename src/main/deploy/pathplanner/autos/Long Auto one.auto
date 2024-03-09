@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.1334335257744161,
-      "y": 4.25089458254926
+      "x": 0.7612792476769783,
+      "y": 4.386721190503992
     },
-    "rotation": 0.0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
@@ -14,25 +14,19 @@
         {
           "type": "named",
           "data": {
-            "name": "AutoAim&Shoot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "New Path"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Long old"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "AutoAim&ShootStop"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Long 1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Return Long Shoot"
           }
         }
       ]

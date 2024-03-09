@@ -15,7 +15,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class PIDShooterCommand extends Command {
   /** Creates a new PIDShooterCommand. */
-  private PIDController m_LeftShooterPIDController;
+ 
   private final ShooterSubsystem m_ShooterSubsystem;
   private VelocityVoltage m_LeftVelocityVoltage;
 private VelocityVoltage m_RightVelocityVoltage;
@@ -23,16 +23,19 @@ private double KP;
 private double KI;
 private double KD;
 
+private double speed;
 
-  public PIDShooterCommand(ShooterSubsystem m_ShooterSubsystem) {
+
+  public PIDShooterCommand(ShooterSubsystem m_ShooterSubsystem,double speed) {
     this.m_ShooterSubsystem = m_ShooterSubsystem;
-    m_LeftShooterPIDController = new PIDController(.00004, 0., 0.0);
+    
    // m_ShooterPIDController.enableContinuousInput(-1, 1);
-    m_LeftShooterPIDController.setTolerance(0.0035);
+    
     
     m_LeftVelocityVoltage = new VelocityVoltage(0);
      m_RightVelocityVoltage = new VelocityVoltage(0);
    
+     this.speed = speed;
     addRequirements(m_ShooterSubsystem);
 
     
@@ -54,9 +57,6 @@ private double KD;
 configLeftTalon();
 configRightTalon();
 
-    m_LeftShooterPIDController.setP(m_ShooterSubsystem.KP);
-    m_LeftShooterPIDController.setI(m_ShooterSubsystem.KI);
-    m_LeftShooterPIDController.setD(m_ShooterSubsystem.KD);
 
    
     //System.out.println("PID init");
@@ -71,11 +71,11 @@ configRightTalon();
     // speed = (speed > 0) ? speed + feedforward : speed - feedforward;
     // m_ShooterSubsystem.setDiffSpeed(speed,0);
 
- m_ShooterSubsystem.LeftShooter.setControl(m_LeftVelocityVoltage.withVelocity(m_ShooterSubsystem.PIDTESTspeed/60));
- m_ShooterSubsystem.RightShooter.setControl(m_RightVelocityVoltage.withVelocity(m_ShooterSubsystem.PIDTESTspeed/60));
+ m_ShooterSubsystem.LeftShooter.setControl(m_LeftVelocityVoltage.withVelocity(speed/60));
+ m_ShooterSubsystem.RightShooter.setControl(m_RightVelocityVoltage.withVelocity(speed/60));
 
-    SmartDashboard.putNumber("LeftShooter output: ", m_ShooterSubsystem.LeftShooter.getMotorVoltage().getValueAsDouble());
-    SmartDashboard.putNumber("RightShooter output: ", m_ShooterSubsystem.RightShooter.getMotorVoltage().getValueAsDouble());
+   // SmartDashboard.putNumber("LeftShooter output: ", m_ShooterSubsystem.LeftShooter.getMotorVoltage().getValueAsDouble());
+   // SmartDashboard.putNumber("RightShooter output: ", m_ShooterSubsystem.RightShooter.getMotorVoltage().getValueAsDouble());
     //System.out.println(m_ShooterSubsystem.GetLeftShooterRPM());
     //System.out.println(LeftsetPoint);
     //System.out.println(speed);
@@ -98,9 +98,7 @@ configRightTalon();
 
   }
 
-  public void LeftsetPoint(double LeftsetPoint)
-  {
-  }
+
 
 
 public void configLeftTalon(){

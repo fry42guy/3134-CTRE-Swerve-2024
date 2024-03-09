@@ -65,7 +65,7 @@ if (setPoint < 2000){
   Tolrance = .5; }
   else
   {
-    Tolrance = .05; 
+    Tolrance = .08; 
 }
 
 
@@ -155,8 +155,8 @@ if (timerruning == false){
      }
 
     
-    System.out.println(shoottime.get());
-    System.out.println(timerruning);
+    //System.out.println(shoottime.get());
+    //System.out.println(timerruning);
     //System.out.println(LeftsetPoint);
     //System.out.println(speed);
    //System.out.println(KP);
@@ -200,7 +200,7 @@ Leftconfig.Slot0.kD = m_ShooterSubsystem.KD;
 
 
 Leftconfig.TorqueCurrent.PeakForwardTorqueCurrent = 40;
-Leftconfig.TorqueCurrent.PeakReverseTorqueCurrent = -40;
+Leftconfig.TorqueCurrent.PeakReverseTorqueCurrent = -1;
 
 m_ShooterSubsystem.LeftShooter.getConfigurator().apply(Leftconfig,.05);
 
@@ -217,7 +217,7 @@ Rightconfig.Slot0.kD = m_ShooterSubsystem.KD;
 
 
 Rightconfig.TorqueCurrent.PeakForwardTorqueCurrent = 40;
-Rightconfig.TorqueCurrent.PeakReverseTorqueCurrent = -40;
+Rightconfig.TorqueCurrent.PeakReverseTorqueCurrent = -1;
 
 m_ShooterSubsystem.RightShooter.getConfigurator().apply(Rightconfig,.05);
 
