@@ -134,7 +134,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     public void periodic(){
         
 m_feild.setRobotPose(getrobotpose());
-      //  SmartDashboard.putData("Feild", m_feild);
+        SmartDashboard.putData("Feild", m_feild);
 
 
 
