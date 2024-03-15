@@ -128,6 +128,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     }
 
     public void init(){
+        
        
     }
 
@@ -169,7 +170,7 @@ return m_odometry.getEstimatedPosition();
 
         LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
        
-       
+      
        
      
        //SmartDashboard.putString("BluePOS", LimelightHelpers.getBotPose2d_wpiBlue("limelight").);
@@ -189,6 +190,25 @@ return m_odometry.getEstimatedPosition();
        }
      
     }
+
+    public void ConfigLimelightAutoshoot(){
+
+LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+
+  this.seedFieldRelative(limelightMeasurement.pose);
+
+  if (DriverStation.getAlliance().get() == Alliance.Red){
+
+    setOperatorPerspectiveForward(new Rotation2d(180));
+  }
+  if (DriverStation.getAlliance().get() == Alliance.Blue){
+
+    setOperatorPerspectiveForward(new Rotation2d(0));
+  }
+
+
+    }
+    
 
 public Rotation2d Getoffsetroation(){
 
