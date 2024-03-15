@@ -195,6 +195,8 @@ return m_odometry.getEstimatedPosition();
 
 LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
 
+if (limelightMeasurement.tagCount >1){
+
   this.seedFieldRelative(limelightMeasurement.pose);
 
   if (DriverStation.getAlliance().get() == Alliance.Red){
@@ -204,7 +206,7 @@ LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPose
   if (DriverStation.getAlliance().get() == Alliance.Blue){
 
     setOperatorPerspectiveForward(new Rotation2d(0));
-  }
+  }}
 
 
     }
