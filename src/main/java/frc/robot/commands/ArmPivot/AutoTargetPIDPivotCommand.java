@@ -89,11 +89,11 @@ if (withEnd){
 
     if (setPoint+.05 > m_ArmSubsystem.PivotMotor.getPosition().getValueAsDouble() && m_ArmSubsystem.PivotMotor.getPosition().getValueAsDouble() > setPoint -.05){
 
-      System.out.println(" AutotargetPIDPivotCommand at setpoint");
+     // System.out.println(" AutotargetPIDPivotCommand at setpoint");
       return true;
     }}
          
-    System.out.println(" AutotargetPIDPivotCommand NOT AT setpoint");
+   // System.out.println(" AutotargetPIDPivotCommand NOT AT setpoint");
     return false;
 
   }

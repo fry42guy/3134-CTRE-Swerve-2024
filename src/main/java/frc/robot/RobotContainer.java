@@ -115,9 +115,11 @@ m_driverController.rightStick().toggleOnTrue(new ParallelCommandGroup( drivetrai
 .withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()).minus(drivetrain.Getoffsetroation()))),
 new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)//,
 //new PIDShooterCommand(m_ShooterSubsystem,4000)
-).beforeStarting(
-drivetrain.runOnce(()-> drivetrain.ConfigLimelightAutoshoot())
-).until(m_driverController.axisGreaterThan(5,.125).or(m_driverController.axisLessThan(5,-.125))));
+)
+// .beforeStarting(
+// drivetrain.runOnce(()-> drivetrain.ConfigLimelightAutoshoot())
+// )
+.until(m_driverController.axisGreaterThan(5,.125).or(m_driverController.axisLessThan(5,-.125))));
 
 
     //m_driverController.a().whileTrue(drivetrain.applyRequest(() -> brake));
