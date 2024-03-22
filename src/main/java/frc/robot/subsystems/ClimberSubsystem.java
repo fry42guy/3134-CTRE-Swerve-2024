@@ -13,15 +13,15 @@ import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
 
-  private final TalonFX ClimberLeftMotor;
-    private final TalonFX ClimberRightMotor;
+  public final TalonFX ClimberLeftMotor;
+    public final TalonFX ClimberRightMotor;
   /** Creates a new Climber. */
   public ClimberSubsystem() {
 
 ClimberLeftMotor = new TalonFX(Constants.Climber.ClimberLeftID);
 ClimberLeftMotor.setInverted(true);
 
-ClimberRightMotor = new TalonFX(Constants.Climber.ClimberLeftID);
+ClimberRightMotor = new TalonFX(Constants.Climber.ClimberRightID);
 ClimberRightMotor.setInverted(false);
 
   }
