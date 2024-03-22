@@ -17,6 +17,7 @@ import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.Odometry;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
@@ -144,6 +145,16 @@ LimelightUpdatePose();
 
         }
 
+
+
+        if (DriverStation.isAutonomousEnabled() && this.getCurrentRobotChassisSpeeds().vxMetersPerSecond < 1 & this.getCurrentRobotChassisSpeeds().vyMetersPerSecond < 1){
+
+AutoLimelightUpdatePose();
+
+System.out.println("Auto Lime is Updateing Pose");
+
+        }
+
 //Updateoperatorperspective();
        
 
@@ -163,7 +174,20 @@ return m_odometry.getEstimatedPosition();
     }
 
 
+  public void AutoLimelightUpdatePose(){
 
+        LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+     
+       if(limelightMeasurement.tagCount >= 2)
+       {
+         this.setVisionMeasurementStdDevs(VecBuilder.fill(2,2,2));//.7,.7,9999999));
+         this.addVisionMeasurement(
+             limelightMeasurement.pose,
+             limelightMeasurement.timestampSeconds);       
+         
+       }
+     
+    }
 
 
     public void LimelightUpdatePose(){

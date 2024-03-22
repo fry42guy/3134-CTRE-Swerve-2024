@@ -8,6 +8,7 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -17,6 +18,7 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  
  
   
   //private final Field2d m_feild = new Field2d();
@@ -43,11 +45,21 @@ RobotContainer.m_Calcs2.SetSpeakerTargetID();
     if (m_robotContainer.m_Calcs2.TargetID == -5){
 
 m_robotContainer.m_Calcs2.SetSpeakerTargetID();
+    }
+
+LimelightHelpers.PoseEstimate limelightMeasurementrobo = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+
+if (limelightMeasurementrobo.tagCount >= 2){
+
+SmartDashboard.putBoolean("Limelight Tages > 1", true);
+    }
+else
+ {SmartDashboard.putBoolean("Limelight Tages > 1", false);}
 
 //m_robotContainer.drivetrain.addVisionMeasurement(null, kDefaultPeriod);
 
 
-    }
+    
 //m_robotContainer.m_Calcs2.getDistTo_Tag(m_robotContainer.m_Calcs2.TargetID,m_robotContainer.drivetrain.getrobotpose());
 
   }

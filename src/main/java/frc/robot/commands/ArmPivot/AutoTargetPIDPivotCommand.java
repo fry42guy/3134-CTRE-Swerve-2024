@@ -66,6 +66,10 @@ configTalon();
   .withLimitForwardMotion(!m_ArmSubsystem.m_FwdLimit.get())
   .withLimitReverseMotion(!m_ArmSubsystem.m_RevLimit.get())
   );
+
+
+  SmartDashboard.putNumber("Pivot Target", setPoint);
+  SmartDashboard.putNumber("Pivot Actual", m_ArmSubsystem.PivotMotor.getPosition().getValueAsDouble());
     // double feedforward = 0.00;
     // double speed = m_PivotPIDController.calculate(m_ArmSubsystem.getPivotEncoder(), setPoint);
     // speed = (speed > 0) ? speed + feedforward : speed - feedforward;
@@ -109,7 +113,7 @@ public void configTalon(){
 TalonFXConfiguration ArmCofig = new TalonFXConfiguration();
 //Rightconfig.Slot0.kV = 0.12;
 ArmCofig.Slot0.kP = 3;
-ArmCofig.Slot0.kI = 1;
+ArmCofig.Slot0.kI = 20;
 ArmCofig.Slot0.kD = 0;
 
 ArmCofig.MotorOutput.NeutralMode = NeutralModeValue.Brake;

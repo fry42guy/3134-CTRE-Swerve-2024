@@ -3,35 +3,35 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.103057997585189,
-        "y": 0.7975856710007242
+        "x": 2.6768758200728833,
+        "y": 6.71347470501504
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.525494548619429,
-        "y": 0.5933259259883435
+        "x": 2.726500237111009,
+        "y": 6.387371393050214
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Left Note"
     },
     {
       "anchor": {
-        "x": 0.9752656472137584,
-        "y": 4.328361263357597
+        "x": 2.3791293178441273,
+        "y": 5.5650239107041255
       },
       "prevControl": {
-        "x": 1.6950380820192916,
-        "y": 3.666948755698458
+        "x": 2.5067349616564516,
+        "y": 5.664272744780377
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Middle Shoot Spot"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.55,
-      "rotationDegrees": -60.0,
+      "waypointRelativePos": 0.25,
+      "rotationDegrees": 0,
       "rotateFast": false
     }
   ],
@@ -45,13 +45,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -60.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Grand Forks Comp",
+  "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 45.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

@@ -3,10 +3,11 @@
   "robotLength": 0.76,
   "holonomicMode": true,
   "pathFolders": [
-    "Imported Paths"
+    "Imported Paths",
+    "Grand Forks Comp"
   ],
   "autoFolders": [
-    "New Folder"
+    "Grand Forks Comp Autos"
   ],
   "defaultMaxVel": 5.0,
   "defaultMaxAccel": 3.5,

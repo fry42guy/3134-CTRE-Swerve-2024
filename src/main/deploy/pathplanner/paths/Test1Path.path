@@ -3,12 +3,12 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3,
+        "x": 1.4717114062898244,
         "y": 5.55
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3000000000000007,
+        "x": 2.471711406289825,
         "y": 5.55
       },
       "isLocked": false,
@@ -106,7 +106,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Grand Forks Comp",
   "previewStartingState": {
     "rotation": -2.1021059708100918,
     "velocity": 0

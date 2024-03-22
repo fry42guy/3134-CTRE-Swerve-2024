@@ -22,6 +22,7 @@ import frc.robot.commands.ArmPivot.ArmDown;
 import frc.robot.commands.ArmPivot.ArmUP;
 import frc.robot.commands.ArmPivot.AutoTargetPIDPivotCommand;
 import frc.robot.commands.ArmPivot.AutoZeroPivotCommand;
+import frc.robot.commands.ArmPivot.PIDPivotCommand;
 import frc.robot.commands.ArmPivot.TargetPIDPivotCommand;
 import frc.robot.commands.Climber.ClimberFWD;
 import frc.robot.commands.Climber.ClimberREV;
@@ -31,6 +32,7 @@ import frc.robot.commands.Intake.IntakeFWDWithSensor;
 import frc.robot.commands.Intake.IntakeREV;
 import frc.robot.commands.Shooter.AutoPIDShooterCommand;
 import frc.robot.commands.Shooter.PIDShooterCommand;
+import frc.robot.commands.Shooter.PIDsetRPMShooterCommand;
 import frc.robot.commands.Shooter.ShootSpeedSame;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ArmSubsystem;
@@ -65,7 +67,7 @@ public class RobotContainer
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); 
 
-      private final PhoenixPIDController turnPID = new PhoenixPIDController(10, 1, 0.0); //3.2
+      private final PhoenixPIDController turnPID = new PhoenixPIDController(10, 0, .1); //3.2 (10, 1, 0.0);
 
 
   
@@ -98,7 +100,9 @@ public class RobotContainer
   private void configureBindings() 
   {
   
-  
+m_ArmSubsystem.setDefaultCommand(new PIDPivotCommand(m_ArmSubsystem, 0, true));
+
+  m_ShooterSubsystem.setDefaultCommand(m_ShooterSubsystem.runOnce(()-> m_ShooterSubsystem.stop()));
     drivetrain.setDefaultCommand
     (
       drivetrain.applyRequest(() -> drive.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
@@ -115,11 +119,11 @@ m_driverController.rightStick().toggleOnTrue(new ParallelCommandGroup( drivetrai
 .withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()).minus(drivetrain.Getoffsetroation()))),
 new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)//,
 //new PIDShooterCommand(m_ShooterSubsystem,4000)
-)
+).beforeStarting(new PIDsetRPMShooterCommand(m_ShooterSubsystem, 4000))
 // .beforeStarting(
 // drivetrain.runOnce(()-> drivetrain.ConfigLimelightAutoshoot())
 // )
-.until(m_driverController.axisGreaterThan(5,.125).or(m_driverController.axisLessThan(5,-.125))));
+.until(m_driverController.axisGreaterThan(5,.3).or(m_driverController.axisLessThan(5,-.3))));
 
 
     //m_driverController.a().whileTrue(drivetrain.applyRequest(() -> brake));
@@ -210,9 +214,12 @@ NamedCommands.registerCommand("Just Aim", new AutoTargetPIDPivotCommand(m_ArmSub
 NamedCommands.registerCommand("AlignandAim",new ParallelCommandGroup( drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
 .withVelocityY(-Math.pow(m_driverController.getLeftX(),3) * MaxSpeed)
 
+
+
 .withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()).minus(drivetrain.Getoffsetroation()))),
 new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)
 .withTimeout(1.5)));
+
 
 
 }
@@ -220,12 +227,14 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)
 
     configureBindings();
     SmartDashboard.putData("Autonomous", m_chooser);
-    m_chooser.setDefaultOption("Untested drive long", drivetrain.getAutoPath("Test Auto1"));
+    m_chooser.setDefaultOption("SC Two Note", drivetrain.getAutoPath("SC Two Note"));
+    m_chooser.addOption("SC Three Note", drivetrain.getAutoPath("SC Three Note"));
      m_chooser.addOption("Tripple Note", drivetrain.getAutoPath("Tripple Note"));
      m_chooser.addOption("Drive Back", drivetrain.getAutoPath("Test Auto2"));
      m_chooser.addOption("Quad Note", drivetrain.getAutoPath("Test Auto3"));
      m_chooser.addOption("Long Auto one", drivetrain.getAutoPath("Long Auto one"));
      m_chooser.addOption("Sit and Shoot", drivetrain.getAutoPath("Sit and Shoot"));
+     
      //m_chooser.addOption("Test Auto4", drivetrain.getAutoPath("Test Auto4"));
      
     // m_chooser.addOption("(Right) Shoot, Drive Back and Intake", drivetrain.getAutoPath("!rsdin"));

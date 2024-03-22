@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.325425210092126,
-      "y": 5.5636463879562825
+      "x": 1.4362653941197343,
+      "y": 5.5650239107041255
     },
-    "rotation": 0.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -18,9 +18,15 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Arm_To_Zero"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "Test1Path"
+            "pathName": "SC Intake Middle Note"
           }
         },
         {
@@ -30,9 +36,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Arm_To_Zero"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "Test2Path"
+            "pathName": "SC Intake Left Note"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Drive Left to Middle"
           }
         },
         {
@@ -44,6 +62,6 @@
       ]
     }
   },
-  "folder": "Grand Forks Comp Autos",
+  "folder": null,
   "choreoAuto": false
 }

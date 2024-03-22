@@ -233,7 +233,7 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
     m_currentLimits.StatorCurrentLimitEnable = true; // And enable it
 
     
-
+    toConfigure.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     toConfigure.CurrentLimits = m_currentLimits;
 
     toConfigure.SoftwareLimitSwitch.withForwardSoftLimitThreshold(256);

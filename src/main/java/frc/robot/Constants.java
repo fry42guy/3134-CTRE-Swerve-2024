@@ -21,7 +21,8 @@ public class Constants
 
     public static class Climber{
 
-        public static final int ClimberID = 50;
+        public static final int ClimberLeftID = 50;
+        public static final int ClimberRightID = 51;
         public static final Double UpSpeed = .5;
         public static final Double DownSpeed = -.5;
       }
