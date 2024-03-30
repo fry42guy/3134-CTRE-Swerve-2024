@@ -3,38 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.6768758200728833,
-        "y": 6.71347470501504
+        "x": 1.0250916529466907,
+        "y": 4.140094221466509
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.726500237111009,
-        "y": 6.387371393050214
+        "x": 0.9964789814898161,
+        "y": 4.044275042634184
       },
       "isLocked": false,
-      "linkedName": "Left Note"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.55,
-        "y": 5.53
+        "x": 1.3015705478733925,
+        "y": 4.012488577654184
       },
       "prevControl": {
-        "x": 2.677605643812324,
-        "y": 5.629248834076252
+        "x": 1.258646626631338,
+        "y": 3.922169493374028
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Middle Shoot Spot"
+      "linkedName": "Sorce Side shoot"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.25,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -45,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
-    "rotateFast": true
+    "rotation": -50.0,
+    "rotateFast": false
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 45.0,
+    "rotation": -50.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

@@ -16,8 +16,9 @@ import com.ctre.phoenix6.controls.DutyCycleOut;
 //import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.ForwardLimitSourceValue;
+import com.ctre.phoenix6.signals.ForwardLimitValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-
+import com.ctre.phoenix6.signals.ReverseLimitValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycle;
@@ -44,8 +45,8 @@ public class ArmSubsystem extends SubsystemBase {
   
 private final CurrentLimitsConfigs m_currentLimits = new CurrentLimitsConfigs();
 
-public final DigitalInput m_FwdLimit = new DigitalInput(2);
-public final DigitalInput m_RevLimit = new DigitalInput(1);
+//public final DigitalInput m_FwdLimit = new DigitalInput(2);
+//public final DigitalInput m_RevLimit = new DigitalInput(1);  ///////////////////////////////////////////////////////////////////////////
 
 public boolean hasHomed;
 
@@ -55,8 +56,7 @@ public boolean hasHomed;
     PivotMotor = new TalonFX(Constants.Arm.LeftPivotID);
     PivotMotor.setInverted(false);
     
-   PivotMotor.setNeutralMode(NeutralModeValue.Brake);///////////////////////////////////////////
-   
+   PivotMotor.setNeutralMode(NeutralModeValue.Brake);///
     HexEncoder = new DutyCycleEncoder(Constants.Arm.EncoderPWMID);
     MaxCurrent = Constants.Arm.MAX_CURRENT_DRAW;
 
@@ -92,7 +92,10 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
     toConfigure.SoftwareLimitSwitch.withReverseSoftLimitThreshold(-2);
     toConfigure.SoftwareLimitSwitch.withForwardSoftLimitEnable(false);
     toConfigure.SoftwareLimitSwitch.withReverseSoftLimitEnable(false);
-      
+    toConfigure.HardwareLimitSwitch.withForwardLimitEnable(true);
+      toConfigure.HardwareLimitSwitch.withReverseLimitEnable(true); 
+      toConfigure.HardwareLimitSwitch.withReverseLimitAutosetPositionValue(0);
+      toConfigure.HardwareLimitSwitch.withReverseLimitAutosetPositionEnable(true);
 
 
     //toConfigure.MotorOutput.withMotorOutput(NeutralMode.Brake);
@@ -126,23 +129,25 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
 
   public void setspeed(Double speed){
 PivotMotor.setControl(m_DutyCycle.withOutput(speed)
-.withLimitForwardMotion(!m_FwdLimit.get())
-.withLimitReverseMotion(!m_RevLimit.get())
+//.withLimitForwardMotion(!m_FwdLimit.get())
+//.withLimitReverseMotion(!m_RevLimit.get())
 );
 
 
   }
 
 
-  public void LimitresetLow(){
-if (!m_RevLimit.get()) {
+//   public void LimitresetLow(){
+// //if (!m_RevLimit.get()) {
 
-  ZeroPivotPositon();
+//   if (PivotMotor.getReverseLimit().getValueAsDouble() > 1){
 
-}
+//   ZeroPivotPositon();
+
+// }
 
 
-}
+// }
 
 
   public void stop(){
@@ -205,15 +210,15 @@ if (inputangle < .25 && encoderupdated == false) {
   @Override
   public void periodic() {
 
-    LimitresetLow();
+   // LimitresetLow();
 
     SmartDashboard.putNumber("Hex Encoder Value", HexEncoder.getAbsolutePosition());
     SmartDashboard.putNumber("Pivot Motor Encoder", getPivotEncoder());
     SmartDashboard.putNumber("Pivot Motor Current",PivotMotor.getStatorCurrent().getValueAsDouble());
     SmartDashboard.putNumber("Calc Encoder Position", Calibrate_Arm_Encoder_To_Hex_Encoder());
 
-    SmartDashboard.putBoolean("FWD Limit Arm", !m_FwdLimit.get());
-    SmartDashboard.putBoolean("Rev Limit Arm", !m_RevLimit.get());
+    SmartDashboard.putBoolean("FWD Limit Arm", PivotMotor.getForwardLimit().getValue()== ForwardLimitValue.ClosedToGround);
+    SmartDashboard.putBoolean("Rev Limit Arm", PivotMotor.getReverseLimit().getValue() == ReverseLimitValue.ClosedToGround);
 
 
     // This method will be called once per scheduler run

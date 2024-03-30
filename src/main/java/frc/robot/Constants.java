@@ -15,7 +15,7 @@ public class Constants
   
     public static final class AutoConstants {
 
-        public static double shoottime = .5; // Time intake runs to shoot
+        public static double shoottime = .75; // Time intake runs to shoot
 
     }
 

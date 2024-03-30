@@ -147,7 +147,7 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)//,
     m_driverController.x().toggleOnTrue(new TargetPIDPivotCommand(m_ArmSubsystem));
     m_driverController.a().onTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
    // m_driverController.y().whileTrue(new AutoIntakeNote(m_IntakeSubsystem, 2  , 0.125));
-    m_driverController.b().onTrue(m_ArmSubsystem.runOnce(() -> m_ArmSubsystem.ZeroPivotPositon()));
+   // m_driverController.b().onTrue(m_ArmSubsystem.runOnce(() -> m_ArmSubsystem.ZeroPivotPositon()));
 
 
 
@@ -211,14 +211,26 @@ NamedCommands.registerCommand("Just Aim", new AutoTargetPIDPivotCommand(m_ArmSub
 
 
 
-NamedCommands.registerCommand("AlignandAim",new ParallelCommandGroup( drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(-Math.pow(m_driverController.getLeftY(),3) * MaxSpeed)
-.withVelocityY(-Math.pow(m_driverController.getLeftX(),3) * MaxSpeed)
-
-
-
+NamedCommands.registerCommand("AlignandAim",new ParallelCommandGroup( drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(0)
+.withVelocityY(0)
+//.withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()).minus(drivetrain.Getoffsetroation()))),
 .withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()).minus(drivetrain.Getoffsetroation()))),
 new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)
 .withTimeout(1.5)));
+
+NamedCommands.registerCommand("AlignandAimShoot",new ParallelCommandGroup(drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(0)
+.withVelocityY(0)
+//.withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()).minus(drivetrain.Getoffsetroation()))),
+.withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()).minus(drivetrain.Getoffsetroation()))).withTimeout(1),
+
+
+
+new SequentialCommandGroup(
+  (new AutoTargetPIDPivotCommand(m_ArmSubsystem,true)),
+  (new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem,4000,false,0.0))
+)));
+
+
 
 
 
@@ -234,6 +246,9 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)
      m_chooser.addOption("Quad Note", drivetrain.getAutoPath("Test Auto3"));
      m_chooser.addOption("Long Auto one", drivetrain.getAutoPath("Long Auto one"));
      m_chooser.addOption("Sit and Shoot", drivetrain.getAutoPath("Sit and Shoot"));
+     m_chooser.addOption("SC Sorce Long 1", drivetrain.getAutoPath("SC Sorce Long 1"));
+     m_chooser.addOption("SC Sorce Shoot", drivetrain.getAutoPath("SC Sorce Shoot"));
+     m_chooser.addOption("Align and Aim Test", drivetrain.getAutoPath("Align and Aim Test"));
      
      //m_chooser.addOption("Test Auto4", drivetrain.getAutoPath("Test Auto4"));
      

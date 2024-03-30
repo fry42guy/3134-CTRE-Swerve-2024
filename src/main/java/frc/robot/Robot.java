@@ -90,7 +90,7 @@ else
     m_robotContainer.m_Calcs2.SetSpeakerTargetID();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
-    RobotContainer.m_ArmSubsystem.setpivotpoistion();
+    //RobotContainer.m_ArmSubsystem.setpivotpoistion();
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

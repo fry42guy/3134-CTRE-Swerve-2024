@@ -82,7 +82,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
             this::getCurrentRobotChassisSpeeds,
             (speeds)->this.setControl(autoRequest.withSpeeds(speeds)), // Consumer of ChassisSpeeds to drive the robot
             new HolonomicPathFollowerConfig(new PIDConstants(10, 0, 0),
-                                            new PIDConstants(10, 0, 0),
+                                            new PIDConstants(9, 2, 0), //10,0,0
                                             TunerConstants.kSpeedAt12VoltsMps,
                                             driveBaseRadius,
                                             new ReplanningConfig()),
@@ -180,7 +180,7 @@ return m_odometry.getEstimatedPosition();
      
        if(limelightMeasurement.tagCount >= 2)
        {
-         this.setVisionMeasurementStdDevs(VecBuilder.fill(2,2,2));//.7,.7,9999999));
+         this.setVisionMeasurementStdDevs(VecBuilder.fill(4,4,4));//.7,.7,9999999));
          this.addVisionMeasurement(
              limelightMeasurement.pose,
              limelightMeasurement.timestampSeconds);       
