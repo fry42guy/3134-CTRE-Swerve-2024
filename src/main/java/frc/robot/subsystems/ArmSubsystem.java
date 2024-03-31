@@ -21,6 +21,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.ReverseLimitValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DutyCycle;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Timer;
@@ -169,11 +170,11 @@ PivotMotor.setControl(m_DutyCycle.withOutput(speed)
 
       double inputangle = HexEncoder.getAbsolutePosition();
       
-if (inputangle < .25 && encoderupdated == false) {
+if (inputangle > .25 && encoderupdated == false) {
 
 
   
-  //Timer.delay(3);
+  Timer.delay(3);
   inputangle = HexEncoder.getAbsolutePosition();
 
   encoderupdated = true; 
@@ -189,9 +190,14 @@ if (inputangle < .25 && encoderupdated == false) {
 
 
     public void setpivotpoistion(){
+
+     
+      
+if (encoderupdated == false) {
+
       PivotMotor.setPosition(Calibrate_Arm_Encoder_To_Hex_Encoder());
     
-  }
+  }}
 
   public void ZeroPivotPositon(){
 
@@ -211,6 +217,7 @@ if (inputangle < .25 && encoderupdated == false) {
   public void periodic() {
 
    // LimitresetLow();
+
 
     SmartDashboard.putNumber("Hex Encoder Value", HexEncoder.getAbsolutePosition());
     SmartDashboard.putNumber("Pivot Motor Encoder", getPivotEncoder());

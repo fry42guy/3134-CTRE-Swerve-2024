@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.0250916529466907,
-        "y": 4.140094221466509
+        "x": 2.3436833056740376,
+        "y": 4.671784404017858
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.9964789814898161,
-        "y": 4.044275042634184
+        "x": 2.3791293178441273,
+        "y": 5.033333728152776
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.3015705478733925,
-        "y": 4.012488577654184
+        "x": 2.180631649691624,
+        "y": 5.53
       },
       "prevControl": {
-        "x": 1.258646626631338,
-        "y": 3.922169493374028
+        "x": 2.2940588886359117,
+        "y": 5.359437040117603
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Sorce Side shoot"
+      "linkedName": "Full Auto Shoot Spot"
     }
   ],
   "rotationTargets": [],
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -50.0,
-    "rotateFast": false
+    "rotation": 0,
+    "rotateFast": true
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Full Auto",
   "previewStartingState": {
-    "rotation": -50.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

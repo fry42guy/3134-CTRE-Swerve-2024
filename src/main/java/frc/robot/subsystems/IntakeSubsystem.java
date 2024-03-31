@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.function.BooleanSupplier;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 //import com.ctre.phoenix6.hardware.TalonFX;
 //import com.ctre.phoenixpro.hardware.TalonFX;
@@ -64,16 +66,16 @@ SmartDashboard.putBoolean("Intake Beam", !RangeFinder.get());
   }
 
 
+public BooleanSupplier Note_In_Intake = () -> Note_In_Intake();
 
-public boolean Note_In_Intake(){
-
-  return !RangeFinder.get();
 
   
 
 
 
+public boolean Note_In_Intake(){
 
+  return !RangeFinder.get();
 }
 
 

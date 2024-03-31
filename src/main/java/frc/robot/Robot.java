@@ -76,9 +76,11 @@ else
   @Override
   public void disabledPeriodic() {
 
-    if (!RobotContainer.m_ArmSubsystem.encoderupdated)
+    if (!RobotContainer.m_ArmSubsystem.encoderupdated){
 
+      System.out.println("Encoder not updated");
     RobotContainer.m_ArmSubsystem.setpivotpoistion();
+    }
   }
 
   @Override

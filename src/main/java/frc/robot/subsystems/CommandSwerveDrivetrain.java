@@ -135,6 +135,8 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
 
     public void periodic(){
         
+        SmartDashboard.putString("NOTETEST", this.m_requestToApply.toString());
+
 m_feild.setRobotPose(getrobotpose());
         SmartDashboard.putData("Feild", m_feild);
 

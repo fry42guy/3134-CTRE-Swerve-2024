@@ -3,36 +3,36 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.6768758200728833,
-        "y": 6.71347470501504
+        "x": 2.180631649691624,
+        "y": 5.53
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.726500237111009,
-        "y": 6.387371393050214
+        "x": 2.4216645324482355,
+        "y": 5.7776999837246645
       },
       "isLocked": false,
-      "linkedName": "Left Note"
+      "linkedName": "Full Auto Shoot Spot"
     },
     {
       "anchor": {
-        "x": 2.3791293178441273,
-        "y": 5.5650239107041255
+        "x": 2.3578617105420734,
+        "y": 5.962019247009133
       },
       "prevControl": {
-        "x": 2.5067349616564516,
-        "y": 5.664272744780377
+        "x": 2.2897751288712795,
+        "y": 5.679946265801558
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Middle Shoot Spot"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.25,
-      "rotationDegrees": 0,
-      "rotateFast": false
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": 45.0,
+      "rotateFast": true
     }
   ],
   "constraintZones": [],
@@ -44,14 +44,14 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 0,
-    "rotateFast": false
+    "velocity": 2.0,
+    "rotation": 60.0,
+    "rotateFast": true
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Full Auto",
   "previewStartingState": {
-    "rotation": 45.0,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

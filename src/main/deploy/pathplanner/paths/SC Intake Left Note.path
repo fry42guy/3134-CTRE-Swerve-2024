@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.55,
-        "y": 5.53
+        "x": 2.3791293178441273,
+        "y": 5.5650239107041255
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3814214539683167,
-        "y": 6.481834620643269
+        "x": 2.210550771812444,
+        "y": 6.516858531347395
       },
       "isLocked": false,
       "linkedName": "Middle Shoot Spot"
@@ -39,7 +39,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0.2,
+      "waypointRelativePos": 0.4,
       "command": {
         "type": "parallel",
         "data": {

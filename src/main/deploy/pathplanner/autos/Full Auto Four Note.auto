@@ -1,0 +1,162 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.4362653941197343,
+      "y": 5.5650239107041255
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "WarmUpShooter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoAim&Shoot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Arm_To_Zero"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Full Auto Intake Middle Note"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DrivetoNote"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AlignandAimShoot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Arm_To_Zero"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Full Auto Intake Left Note"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DrivetoNote"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Full Auto Drive Left to Middle"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Just Aim"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AlignandAimShoot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Full Auto Intake Right Note"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Arm_To_Zero"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DrivetoNote"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Just Aim"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Full Auto Right to Middle"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoAim&ShootStop"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Full Auto",
+  "choreoAuto": false
+}

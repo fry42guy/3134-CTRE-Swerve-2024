@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.55,
-        "y": 5.53
+        "x": 2.3791293178441273,
+        "y": 5.5650239107041255
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.634314471602693,
-        "y": 5.324362732239776
+        "x": 2.4634437894468206,
+        "y": 5.359386642943901
       },
       "isLocked": false,
       "linkedName": "Middle Shoot Spot"
     },
     {
       "anchor": {
-        "x": 2.55,
-        "y": 4.056014936674423
+        "x": 2.3791293178441273,
+        "y": 4.318634608833198
       },
       "prevControl": {
-        "x": 1.4573892741504022,
-        "y": 4.697974135284762
+        "x": 1.6658581184460945,
+        "y": 4.775787371479956
       },
       "nextControl": null,
       "isLocked": false,
@@ -39,7 +39,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0.45,
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "parallel",
         "data": {

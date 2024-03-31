@@ -63,8 +63,8 @@ configTalon();
 
 
   m_ArmSubsystem.PivotMotor.setControl(m_armPositionVoltage.withPosition(setPoint)
-  .withLimitForwardMotion(!m_ArmSubsystem.m_FwdLimit.get())
-  .withLimitReverseMotion(!m_ArmSubsystem.m_RevLimit.get())
+  //.withLimitForwardMotion(!m_ArmSubsystem.m_FwdLimit.get())
+  //.withLimitReverseMotion(!m_ArmSubsystem.m_RevLimit.get())
   );
 
 

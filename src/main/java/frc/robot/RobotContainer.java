@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 import com.ctre.phoenix6.Utils;
 
+import frc.robot.commands.DriveToNote;
 import frc.robot.commands.Rumble_Time;
 import frc.robot.commands.ArmPivot.ArmDown;
 import frc.robot.commands.ArmPivot.ArmUP;
@@ -146,6 +147,14 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)//,
     m_driverController.povDown().whileTrue(new ClimberREV(m_ClimberSubsystem));
     m_driverController.x().toggleOnTrue(new TargetPIDPivotCommand(m_ArmSubsystem));
     m_driverController.a().onTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
+
+    m_driverController.b().whileTrue(new DriveToNote(drivetrain, m_IntakeSubsystem, 2, 1.5));
+
+//m_driverController.b().whileTrue(new ParallelCommandGroup(new IntakeFWDWithSensor(m_IntakeSubsystem),drivetrain.applyRequest(()-> forwardStraight.withVelocityX(1).withRotationalRate(LimelightHelpers.getTX("limelight-note")*-.1))).withTimeout(5).until(m_IntakeSubsystem.Note_In_Intake));
+
+
+
+
    // m_driverController.y().whileTrue(new AutoIntakeNote(m_IntakeSubsystem, 2  , 0.125));
    // m_driverController.b().onTrue(m_ArmSubsystem.runOnce(() -> m_ArmSubsystem.ZeroPivotPositon()));
 
@@ -232,7 +241,13 @@ new SequentialCommandGroup(
 
 
 
+NamedCommands.registerCommand("DrivetoNote", new DriveToNote(drivetrain, m_IntakeSubsystem, 2, 1.5));
+// NamedCommands.registerCommand("DrivetoNote",new ParallelCommandGroup(new IntakeFWDWithSensor(m_IntakeSubsystem),
+// drivetrain.applyRequest(()-> forwardStraight.withVelocityX(1.5).withRotationalRate(LimelightHelpers.getTX("limelight-note")*-.08))
+// .until(m_IntakeSubsystem.Note_In_Intake))
+// .andThen(drivetrain.applyRequest(()-> forwardStraight.withVelocityX(0))).until(m_IntakeSubsystem.Note_In_Intake));
 
+NamedCommands.registerCommand("WarmUpShooter", new PIDsetRPMShooterCommand(m_ShooterSubsystem, 4000));
 
 }
 
@@ -249,7 +264,8 @@ new SequentialCommandGroup(
      m_chooser.addOption("SC Sorce Long 1", drivetrain.getAutoPath("SC Sorce Long 1"));
      m_chooser.addOption("SC Sorce Shoot", drivetrain.getAutoPath("SC Sorce Shoot"));
      m_chooser.addOption("Align and Aim Test", drivetrain.getAutoPath("Align and Aim Test"));
-     
+     m_chooser.addOption("Full Auto Three Note",drivetrain.getAutoPath("Full Auto Three Note"));
+     m_chooser.addOption("Full Auto Four Note", drivetrain.getAutoPath("Full Auto Four Note"));
      //m_chooser.addOption("Test Auto4", drivetrain.getAutoPath("Test Auto4"));
      
     // m_chooser.addOption("(Right) Shoot, Drive Back and Intake", drivetrain.getAutoPath("!rsdin"));
