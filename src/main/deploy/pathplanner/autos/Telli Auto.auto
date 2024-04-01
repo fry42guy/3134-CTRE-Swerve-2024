@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": null,
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Arm_To_Zero"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DrivetoNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Shootpath"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AlignandAimShoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

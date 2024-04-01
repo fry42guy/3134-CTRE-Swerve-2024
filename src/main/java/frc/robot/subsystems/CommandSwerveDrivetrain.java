@@ -206,7 +206,7 @@ return m_odometry.getEstimatedPosition();
      
        if(limelightMeasurement.tagCount >= 2)
        {
-         this.setVisionMeasurementStdDevs(VecBuilder.fill(1,1,1));//.7,.7,9999999));
+         this.setVisionMeasurementStdDevs(VecBuilder.fill(4,4,4));//.7,.7,9999999));
          this.addVisionMeasurement(
              limelightMeasurement.pose,
              limelightMeasurement.timestampSeconds);

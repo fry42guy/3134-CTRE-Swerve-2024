@@ -148,7 +148,9 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)//,
     m_driverController.x().toggleOnTrue(new TargetPIDPivotCommand(m_ArmSubsystem));
     m_driverController.a().onTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
 
-    m_driverController.b().whileTrue(new DriveToNote(drivetrain, m_IntakeSubsystem, 2, 1.5));
+    m_driverController.b().whileTrue(new ParallelCommandGroup(new AutoZeroPivotCommand(m_ArmSubsystem), new DriveToNote(drivetrain, m_IntakeSubsystem, 2, 1.5)));
+
+    //m_driverController.povLeft().onTrue(drivetrain.getAutoPath("Telli Auto").until(m_driverController.axisGreaterThan(5,.3).or(m_driverController.axisLessThan(5,-.3))));
 
 //m_driverController.b().whileTrue(new ParallelCommandGroup(new IntakeFWDWithSensor(m_IntakeSubsystem),drivetrain.applyRequest(()-> forwardStraight.withVelocityX(1).withRotationalRate(LimelightHelpers.getTX("limelight-note")*-.1))).withTimeout(5).until(m_IntakeSubsystem.Note_In_Intake));
 
