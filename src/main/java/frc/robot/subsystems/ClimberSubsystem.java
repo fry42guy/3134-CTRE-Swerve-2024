@@ -83,8 +83,8 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
     toConfigure.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     toConfigure.CurrentLimits = m_currentLimits;
 
-    toConfigure.SoftwareLimitSwitch.withForwardSoftLimitThreshold(143);
-    toConfigure.SoftwareLimitSwitch.withReverseSoftLimitThreshold(-215);
+    toConfigure.SoftwareLimitSwitch.withForwardSoftLimitThreshold(80);
+    toConfigure.SoftwareLimitSwitch.withReverseSoftLimitThreshold(-300);
     toConfigure.SoftwareLimitSwitch.withForwardSoftLimitEnable(true);
     toConfigure.SoftwareLimitSwitch.withReverseSoftLimitEnable(true);
     toConfigure.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
@@ -100,8 +100,8 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
     toConfigure.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     toConfigure.CurrentLimits = m_currentLimits;
 
-    toConfigure.SoftwareLimitSwitch.withForwardSoftLimitThreshold(143);
-    toConfigure.SoftwareLimitSwitch.withReverseSoftLimitThreshold(-215);
+    toConfigure.SoftwareLimitSwitch.withForwardSoftLimitThreshold(80);
+    toConfigure.SoftwareLimitSwitch.withReverseSoftLimitThreshold(-300);
     toConfigure.SoftwareLimitSwitch.withForwardSoftLimitEnable(true);
     toConfigure.SoftwareLimitSwitch.withReverseSoftLimitEnable(true);
  toConfigure.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;

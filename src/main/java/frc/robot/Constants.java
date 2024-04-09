@@ -23,8 +23,8 @@ public class Constants
 
         public static final int ClimberLeftID = 50;
         public static final int ClimberRightID = 51;
-        public static final Double UpSpeed = .5;
-        public static final Double DownSpeed = -.5;
+        public static final Double UpSpeed = 1.0;
+        public static final Double DownSpeed = -1.0;
       }
     
     

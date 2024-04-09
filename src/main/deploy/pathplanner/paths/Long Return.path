@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.103057997585189,
-        "y": 0.7975856710007242
+        "x": 5.021553929363783,
+        "y": 1.3811849424646707
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.428228003375438,
-        "y": 1.7021645417698412
+        "x": 3.183216224252353,
+        "y": 1.8675176686846262
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Long1Waypoint"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 4.17
       },
       "prevControl": {
-        "x": 1.325425210092126,
-        "y": 1.9842375229774147
+        "x": 1.6853114274954524,
+        "y": 3.683667273780045
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,29 +30,47 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.55,
-      "rotationDegrees": -60.0,
+      "waypointRelativePos": 0.4,
+      "rotationDegrees": -50.0,
       "rotateFast": false
     }
   ],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.4,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "WarmUpShooter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
-    "maxVelocity": 7.0,
+    "maxVelocity": 5.0,
     "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -60.0,
+    "rotation": -50.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Grand Forks Comp",
+  "folder": null,
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

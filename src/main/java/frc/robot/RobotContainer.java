@@ -148,8 +148,8 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)//,
     m_driverController.x().toggleOnTrue(new TargetPIDPivotCommand(m_ArmSubsystem));
     m_driverController.a().onTrue(new AutoZeroPivotCommand(m_ArmSubsystem));
 
-    m_driverController.b().whileTrue(new ParallelCommandGroup(new AutoZeroPivotCommand(m_ArmSubsystem), new DriveToNote(drivetrain, m_IntakeSubsystem, 2, 1.5)));
-
+    m_driverController.b().whileTrue( new SequentialCommandGroup(new ParallelCommandGroup(new AutoZeroPivotCommand(m_ArmSubsystem), new DriveToNote(drivetrain, m_IntakeSubsystem, 2, 1.5)), new Rumble_Time(2.0)));
+m_driverController.povLeft().whileTrue(new PIDPivotCommand(m_ArmSubsystem, 16, false));
     //m_driverController.povLeft().onTrue(drivetrain.getAutoPath("Telli Auto").until(m_driverController.axisGreaterThan(5,.3).or(m_driverController.axisLessThan(5,-.3))));
 
 //m_driverController.b().whileTrue(new ParallelCommandGroup(new IntakeFWDWithSensor(m_IntakeSubsystem),drivetrain.applyRequest(()-> forwardStraight.withVelocityX(1).withRotationalRate(LimelightHelpers.getTX("limelight-note")*-.1))).withTimeout(5).until(m_IntakeSubsystem.Note_In_Intake));
@@ -242,6 +242,19 @@ new SequentialCommandGroup(
 )));
 
 
+NamedCommands.registerCommand("AlignandAimShootStop",new ParallelCommandGroup(drivetrain.applyRequest(() -> driveFaceinangle.withVelocityX(0)
+.withVelocityY(0)
+//.withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()).minus(drivetrain.Getoffsetroation()))),
+.withTargetDirection(m_Calcs2.AbsRotationToTag(m_Calcs2.TargetID,drivetrain.getrobotpose()).minus(drivetrain.Getoffsetroation()))).withTimeout(1),
+
+
+
+new SequentialCommandGroup(
+  (new AutoTargetPIDPivotCommand(m_ArmSubsystem,true)),
+  (new AutoPIDShooterCommand(m_ShooterSubsystem,m_IntakeSubsystem,4000,true,0.0))
+)));
+
+
 
 NamedCommands.registerCommand("DrivetoNote", new DriveToNote(drivetrain, m_IntakeSubsystem, 2, 1.5));
 // NamedCommands.registerCommand("DrivetoNote",new ParallelCommandGroup(new IntakeFWDWithSensor(m_IntakeSubsystem),
@@ -263,11 +276,13 @@ NamedCommands.registerCommand("WarmUpShooter", new PIDsetRPMShooterCommand(m_Sho
      m_chooser.addOption("Quad Note", drivetrain.getAutoPath("Test Auto3"));
      m_chooser.addOption("Long Auto one", drivetrain.getAutoPath("Long Auto one"));
      m_chooser.addOption("Sit and Shoot", drivetrain.getAutoPath("Sit and Shoot"));
-     m_chooser.addOption("SC Sorce Long 1", drivetrain.getAutoPath("SC Sorce Long 1"));
-     m_chooser.addOption("SC Sorce Shoot", drivetrain.getAutoPath("SC Sorce Shoot"));
-     m_chooser.addOption("Align and Aim Test", drivetrain.getAutoPath("Align and Aim Test"));
+     //m_chooser.addOption("SC Sorce Long 1", drivetrain.getAutoPath("SC Sorce Long 1"));
+     //m_chooser.addOption("SC Sorce Shoot", drivetrain.getAutoPath("SC Sorce Shoot"));
+    // m_chooser.addOption("Align and Aim Test", drivetrain.getAutoPath("Align and Aim Test"));
      m_chooser.addOption("Full Auto Three Note",drivetrain.getAutoPath("Full Auto Three Note"));
      m_chooser.addOption("Full Auto Four Note", drivetrain.getAutoPath("Full Auto Four Note"));
+     m_chooser.addOption("Full Auto Long Three Note", drivetrain.getAutoPath("Full Auto Long Three Note"));
+     m_chooser.addOption("Full Auto Long Two Note", drivetrain.getAutoPath("Full Auto Long Two Note"));
      //m_chooser.addOption("Test Auto4", drivetrain.getAutoPath("Test Auto4"));
      
     // m_chooser.addOption("(Right) Shoot, Drive Back and Intake", drivetrain.getAutoPath("!rsdin"));

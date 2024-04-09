@@ -3,38 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.180631649691624,
-        "y": 5.53
+        "x": 0.8779991019697675,
+        "y": 4.347814572406395
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.1230108810928523,
-        "y": 5.855446023688256
+        "x": 1.1406187741285432,
+        "y": 4.270001336211201
       },
       "isLocked": false,
-      "linkedName": "Full Auto Shoot Spot"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.307817317056435,
-        "y": 6.215332241091023
+        "x": 1.3254252100926858,
+        "y": 4.16
       },
       "prevControl": {
-        "x": 2.132737535617251,
-        "y": 6.001345841554243
+        "x": 1.0919855015065476,
+        "y": 4.218359927152528
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Long Shoot Spot"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 45.0,
-      "rotateFast": true
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -44,14 +38,14 @@
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
-    "velocity": 2.0,
-    "rotation": 60.0,
-    "rotateFast": true
+    "velocity": 0,
+    "rotation": -60.0,
+    "rotateFast": false
   },
   "reversed": false,
-  "folder": "Full Auto",
+  "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -60.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

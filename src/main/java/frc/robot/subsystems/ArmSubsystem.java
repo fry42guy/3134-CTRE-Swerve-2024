@@ -138,17 +138,20 @@ PivotMotor.setControl(m_DutyCycle.withOutput(speed)
   }
 
 
-//   public void LimitresetLow(){
-// //if (!m_RevLimit.get()) {
-
-//   if (PivotMotor.getReverseLimit().getValueAsDouble() > 1){
-
-//   ZeroPivotPositon();
-
-// }
+  public void LimitresetLow(){
+//if (!m_RevLimit.get()) {
+//System.out.println(PivotMotor.getPosition().getValueAsDouble());
 
 
-// }
+  if (PivotMotor.getReverseLimit().getValueAsDouble() == 0.0){
+
+    //System.out.println(PivotMotor.getReverseLimit().getValueAsDouble());
+  ZeroPivotPositon();
+
+}
+
+
+}
 
 
   public void stop(){
@@ -216,7 +219,7 @@ if (encoderupdated == false) {
   @Override
   public void periodic() {
 
-   // LimitresetLow();
+    LimitresetLow();
 
 
     SmartDashboard.putNumber("Hex Encoder Value", HexEncoder.getAbsolutePosition());
@@ -245,6 +248,16 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
     m_currentLimits.StatorCurrentLimitEnable = true; // And enable it
 
     
+   toConfigure.Slot0.kP = 3;
+    toConfigure.Slot0.kI = 20;
+    toConfigure.Slot0.kD = 0;
+    
+    toConfigure.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    
+    
+    toConfigure.TorqueCurrent.PeakForwardTorqueCurrent = 40;
+    toConfigure.TorqueCurrent.PeakReverseTorqueCurrent = -40;
+
     toConfigure.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     toConfigure.CurrentLimits = m_currentLimits;
 
@@ -252,6 +265,8 @@ TalonFXConfiguration toConfigure = new TalonFXConfiguration();
     toConfigure.SoftwareLimitSwitch.withReverseSoftLimitThreshold(-1);
     toConfigure.SoftwareLimitSwitch.withForwardSoftLimitEnable(true);
     toConfigure.SoftwareLimitSwitch.withReverseSoftLimitEnable(true);
+    toConfigure.HardwareLimitSwitch.withReverseLimitAutosetPositionValue(0);
+    toConfigure.HardwareLimitSwitch.withReverseLimitAutosetPositionEnable(true);
       
 
 

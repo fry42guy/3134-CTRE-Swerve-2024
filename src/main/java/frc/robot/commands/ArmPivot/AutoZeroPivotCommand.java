@@ -42,7 +42,7 @@ public class AutoZeroPivotCommand extends Command {
   @Override
   public void initialize() {
 
-   
+    System.out.println("AutoZeroPivot Started");
 
 configTalon();
 
@@ -72,14 +72,15 @@ configTalon();
   @Override
   public void end(boolean interrupted) 
   {
-    m_ArmSubsystem.setspeed(0.0);
+    System.out.println("AutoZeroPivot Ended");
+    //m_ArmSubsystem.setspeed(0.0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     
-    if (setPoint+.05 > m_ArmSubsystem.PivotMotor.getPosition().getValueAsDouble() && m_ArmSubsystem.PivotMotor.getPosition().getValueAsDouble() > setPoint -.05){
+    if (setPoint+.5 > m_ArmSubsystem.PivotMotor.getPosition().getValueAsDouble() && m_ArmSubsystem.PivotMotor.getPosition().getValueAsDouble() > setPoint -.5){
 
       return true;
     }

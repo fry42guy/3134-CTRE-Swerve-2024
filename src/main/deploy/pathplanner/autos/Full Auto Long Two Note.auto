@@ -5,7 +5,7 @@
       "x": 1.0822588469821486,
       "y": 4.318634608833198
     },
-    "rotation": 0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,7 @@
         {
           "type": "named",
           "data": {
-            "name": "AutoAim&Shoot"
+            "name": "AlignandAimShootStop"
           }
         },
         {
@@ -36,38 +36,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Full Auto Intake Middle Note"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "DrivetoNote"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AlignandAimShoot"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Arm_To_Zero"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Full Auto Intake Left Note"
+                  "pathName": "Full Auto Long 1"
                 }
               }
             ]
@@ -86,7 +55,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Full Auto Drive Left to Middle"
+                  "pathName": "Return Long Shoot"
                 }
               },
               {

@@ -62,6 +62,8 @@ Runtime = new Timer();
     Runtime.start();
     m_IntakeSubsystem.setspeed(1.0);
 
+    System.out.println("Drive to note Started");
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -134,7 +136,7 @@ m_commandSwerveDrivetrain.setControl(robotCentric
     
     Runtime.stop();
 
-
+System.out.println("Drive to note Ended");
 
   }
 

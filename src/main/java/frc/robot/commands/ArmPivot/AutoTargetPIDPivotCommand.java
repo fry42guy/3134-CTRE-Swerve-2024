@@ -45,7 +45,7 @@ m_Calcs2 = RobotContainer.m_Calcs2;
   public void initialize() {
 
    
-
+    System.out.println("AutoTargetPIDCommand Started");
 configTalon();
 
   }
@@ -58,7 +58,7 @@ configTalon();
 
   setPoint = m_Calcs2.absbyPostSetpointSpeaker();
 
-
+  System.out.println("setpoint = " + setPoint );
   SmartDashboard.putNumber("Arm Setpoint Auto", setPoint);
 
 
@@ -82,6 +82,7 @@ configTalon();
   public void end(boolean interrupted) 
   {
     m_ArmSubsystem.setspeed(0.0);
+    System.out.println("AutoTargetPIDCommand END");
   }
 
   // Returns true when the command should end.

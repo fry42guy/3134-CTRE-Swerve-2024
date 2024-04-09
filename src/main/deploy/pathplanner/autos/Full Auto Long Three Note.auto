@@ -2,41 +2,35 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.0822588469821486,
-      "y": 4.318634608833198
+      "x": 0.75,
+      "y": 4.45
     },
-    "rotation": 0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "WarmUpShooter"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AutoAim&Shoot"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "Arm_To_Zero"
+                  "name": "WarmUpShooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Just Aim"
                 }
               },
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Full Auto Intake Middle Note"
+                  "pathName": "Long Start"
                 }
               }
             ]
@@ -45,13 +39,7 @@
         {
           "type": "named",
           "data": {
-            "name": "DrivetoNote"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AlignandAimShoot"
+            "name": "AlignandAimShootStop"
           }
         },
         {
@@ -67,7 +55,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Full Auto Intake Left Note"
+                  "pathName": "Full Auto Long 1"
                 }
               }
             ]
@@ -86,7 +74,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Full Auto Drive Left to Middle"
+                  "pathName": "Return Long Shoot"
                 }
               },
               {
@@ -101,7 +89,57 @@
         {
           "type": "named",
           "data": {
-            "name": "AutoAim&ShootStop"
+            "name": "AlignandAimShootStop"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Arm_To_Zero"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Full Auto Long 2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "DrivetoNote"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Just Aim"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Return Long Shoot"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AlignandAimShootStop"
           }
         }
       ]
