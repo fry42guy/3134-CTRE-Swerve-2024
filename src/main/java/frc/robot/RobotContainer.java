@@ -82,7 +82,7 @@ public class RobotContainer
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
  
   public final CommandXboxController m_driverController =  new CommandXboxController(0);//Constants.OperatorConstants.kDriverControllerPort);
-
+  public final CommandXboxController m_OperatorController =  new CommandXboxController(1);
 
 
 
@@ -151,23 +151,16 @@ new AutoTargetPIDPivotCommand(m_ArmSubsystem, false)//,
     m_driverController.b().whileTrue( new SequentialCommandGroup(new ParallelCommandGroup(new AutoZeroPivotCommand(m_ArmSubsystem), new DriveToNote(drivetrain, m_IntakeSubsystem, 2, 1.5)), new Rumble_Time(2.0)));
 m_driverController.povLeft().whileTrue(new PIDPivotCommand(m_ArmSubsystem, 16, false));
     //m_driverController.povLeft().onTrue(drivetrain.getAutoPath("Telli Auto").until(m_driverController.axisGreaterThan(5,.3).or(m_driverController.axisLessThan(5,-.3))));
-
 //m_driverController.b().whileTrue(new ParallelCommandGroup(new IntakeFWDWithSensor(m_IntakeSubsystem),drivetrain.applyRequest(()-> forwardStraight.withVelocityX(1).withRotationalRate(LimelightHelpers.getTX("limelight-note")*-.1))).withTimeout(5).until(m_IntakeSubsystem.Note_In_Intake));
-
-
-
-
    // m_driverController.y().whileTrue(new AutoIntakeNote(m_IntakeSubsystem, 2  , 0.125));
    // m_driverController.b().onTrue(m_ArmSubsystem.runOnce(() -> m_ArmSubsystem.ZeroPivotPositon()));
-
-
-
    // m_driverController.povRight().onTrue(drivetrain.runOnce(()-> drivetrain.Uppdateseededroation()));
 
 
+   m_OperatorController.povUp().whileTrue(new ClimberFWD(m_ClimberSubsystem));
+   m_OperatorController.povDown().whileTrue(new ClimberREV(m_ClimberSubsystem));
 
-
-
+   m_OperatorController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem, m_IntakeSubsystem,m_Calcs2.getlobspeed() ,true, 0.0));
 
 
 

@@ -27,6 +27,9 @@ public class IntakeSubsystem extends SubsystemBase {
 IntakeMotor = new TalonSRX(Constants.Intake.IntakeMotorID);
 IntakeMotor.setInverted(true);
 
+SmartDashboard.setDefaultNumber("Lob RPM Speed", 1000);
+
+
 
 RangeFinder = new DigitalInput(3);
 
