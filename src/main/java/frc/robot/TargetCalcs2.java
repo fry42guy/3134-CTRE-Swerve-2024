@@ -176,7 +176,7 @@ else {
 public double getlobspeed(){
 
   double Lobspeed;
- Lobspeed = SmartDashboard.getNumber("Lob RPM Speed", 1000);
+ Lobspeed = SmartDashboard.getNumber("Lob RPM Speed", 3500);
  return Lobspeed;
 }
 
