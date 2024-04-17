@@ -160,7 +160,7 @@ m_driverController.povLeft().whileTrue(new PIDPivotCommand(m_ArmSubsystem, 16, f
    m_OperatorController.y().whileTrue(new ClimberFWD(m_ClimberSubsystem));
    m_OperatorController.x().whileTrue(new ClimberREV(m_ClimberSubsystem));
 
-   m_OperatorController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem, m_IntakeSubsystem,m_Calcs2.getlobspeed() ,true, 0.0));
+   m_OperatorController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem, m_IntakeSubsystem,3500.0 ,true, 0.0));
 
 
 
