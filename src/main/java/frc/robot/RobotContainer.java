@@ -160,7 +160,7 @@ m_driverController.povLeft().whileTrue(new PIDPivotCommand(m_ArmSubsystem, 16, f
    m_OperatorController.y().whileTrue(new ClimberFWD(m_ClimberSubsystem));
    m_OperatorController.x().whileTrue(new ClimberREV(m_ClimberSubsystem));
 
-   m_OperatorController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem, m_IntakeSubsystem,3500.0 ,true, 0.0));
+   m_OperatorController.leftBumper().whileTrue(new AutoPIDShooterCommand(m_ShooterSubsystem, m_IntakeSubsystem,3300.0 ,true, 0.0));
 
 
 
@@ -276,6 +276,7 @@ NamedCommands.registerCommand("WarmUpShooter", new PIDsetRPMShooterCommand(m_Sho
      m_chooser.addOption("Full Auto Four Note", drivetrain.getAutoPath("Full Auto Four Note"));
      m_chooser.addOption("Full Auto Long Three Note", drivetrain.getAutoPath("Full Auto Long Three Note"));
      m_chooser.addOption("Full Auto Long Two Note", drivetrain.getAutoPath("Full Auto Long Two Note"));
+     m_chooser.addOption("Full Auto Right Center Note", drivetrain.getAutoPath("Full Auto Right Center Note"));
      //m_chooser.addOption("Test Auto4", drivetrain.getAutoPath("Test Auto4"));
      
     // m_chooser.addOption("(Right) Shoot, Drive Back and Intake", drivetrain.getAutoPath("!rsdin"));

@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3473171105886368,
-      "y": 5.53
+      "x": 1.4362653941197343,
+      "y": 5.5650239107041255
     },
     "rotation": 0
   },
@@ -59,15 +59,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "Arm_To_Zero"
+                  "pathName": "Full Auto Intake Right Note"
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Full Auto Intake Left Note"
+                  "name": "Arm_To_Zero"
                 }
               }
             ]
@@ -84,15 +84,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "Full Auto Drive Left to Middle"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "Just Aim"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Full Auto Right to Middle"
                 }
               }
             ]

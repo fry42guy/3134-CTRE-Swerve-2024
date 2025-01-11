@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import java.util.function.BooleanSupplier;
+/*import java.util.function.BooleanSupplier;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 //import com.ctre.phoenix6.hardware.TalonFX;
@@ -22,7 +22,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   private final DigitalInput RangeFinder ;
   /** Creates a new Intake. */
-  public IntakeSubsystem() {
+  /*public IntakeSubsystem() {
 
 IntakeMotor = new TalonSRX(Constants.Intake.IntakeMotorID);
 IntakeMotor.setInverted(true);
@@ -85,4 +85,4 @@ public boolean Note_In_Intake(){
 
 
 
-}
+}*/

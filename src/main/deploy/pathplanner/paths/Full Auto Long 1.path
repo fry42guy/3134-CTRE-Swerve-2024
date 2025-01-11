@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 1.3254252100926858,
-        "y": 4.16
+        "y": 4.17
       },
       "prevControl": null,
       "nextControl": {
         "x": 1.4032384462873189,
-        "y": 2.03287079559941
+        "y": 2.0428707955994097
       },
       "isLocked": false,
       "linkedName": "Long Shoot Spot"
